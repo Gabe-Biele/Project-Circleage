@@ -9,15 +9,12 @@ class SmartFoxConnection : MonoBehaviour
 
     //Singleton Setup
     private static SmartFoxConnection OurInstance;
-    private SmartFoxConnection()
-    {
-        OurInstance = new GameObject("SmartFoxConnection").AddComponent(typeof(SmartFoxConnection)) as SmartFoxConnection;
-    }
+    private SmartFoxConnection() { }
     public static SmartFoxConnection GetInstance()
     {
         if(OurInstance == null)
         {
-            OurInstance = new SmartFoxConnection();
+            OurInstance = new GameObject("SmartFoxConnection").AddComponent(typeof(SmartFoxConnection)) as SmartFoxConnection;
         }
         return OurInstance;
     }
