@@ -44,7 +44,6 @@ public class LoginConnector : MonoBehaviour
         SFServer.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
         SFServer.AddEventListener(SFSEvent.ROOM_JOIN, OnRoomJoin);
         SFServer.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnRoomJoinError);
-        SFServer.AddEventListener(SFSEvent.EXTENSION_RESPONSE, )
 
         SFServer.Connect(this.OurConfigData);
     }
@@ -67,6 +66,7 @@ public class LoginConnector : MonoBehaviour
         {
             this.RegisterPanel.SetActive(true);
             this.LoginPanel.SetActive(false);
+            SFServer.Send(new LoginRequest("", "", "Registration"));
         }
         if(buttonName == "ExitButton")
         {
@@ -90,8 +90,9 @@ public class LoginConnector : MonoBehaviour
 
             if(PasswordTB.text == ConfirmPasswordTB.text)
             {
+                //String EncryptedPW = PasswordUtil.MD5Password(PasswordTB.text);
                 NewAccountObject.PutUtfString("Username", UsernameTB.text);
-                NewAccountObject.PutUtfString("Password", PasswordTB.text);
+                NewAccountObject.PutUtfString("PasswordHash", PasswordTB.text);
                 NewAccountObject.PutUtfString("Email", EmailTB.text);
                 NewAccountObject.PutUtfString("RegistrationKey", RegistrationKeyTB.text);
 
@@ -159,11 +160,11 @@ public class LoginConnector : MonoBehaviour
     }
     private void OnLogin(BaseEvent evt)
     {
-        throw new NotImplementedException();
+        Debug.Log("Login Success! You are now in " + SFServer.CurrentZone);
     }
     private void OnLoginError(BaseEvent evt)
     {
-        throw new NotImplementedException();
+        Debug.Log("Login Error:" + evt.Params["errorMessage"]);
     }
     private void OnRoomJoin(BaseEvent evt)
     {
