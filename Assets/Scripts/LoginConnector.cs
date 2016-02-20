@@ -44,6 +44,7 @@ public class LoginConnector : MonoBehaviour
         SFServer.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
         SFServer.AddEventListener(SFSEvent.ROOM_JOIN, OnRoomJoin);
         SFServer.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnRoomJoinError);
+        SFServer.AddEventListener(SFSEvent.EXTENSION_RESPONSE, )
 
         SFServer.Connect(this.OurConfigData);
     }
@@ -75,7 +76,31 @@ public class LoginConnector : MonoBehaviour
         }
         if(buttonName == "CreateButton")
         {
+            SFSObject NewAccountObject = new SFSObject();
+            InputField UsernameTB = GameObject.Find("UsernameTB").GetComponent<InputField>();
+            InputField PasswordTB = GameObject.Find("PasswordTB").GetComponent<InputField>();
+            InputField ConfirmPasswordTB = GameObject.Find("ConfirmPasswordTB").GetComponent<InputField>();
+            InputField EmailTB = GameObject.Find("EmailTB").GetComponent<InputField>();
+            InputField RegistrationKeyTB = GameObject.Find("RegistrationKeyTB").GetComponent<InputField>();
+            Debug.Log("Username: " + UsernameTB.text);
+            Debug.Log("Password: " + PasswordTB.text);
+            Debug.Log("ConfirmPW: " + ConfirmPasswordTB.text);
+            Debug.Log("Email: " + EmailTB.text);
+            Debug.Log("RegistrationKey: " + RegistrationKeyTB.text);
 
+            if(PasswordTB.text == ConfirmPasswordTB.text)
+            {
+                NewAccountObject.PutUtfString("Username", UsernameTB.text);
+                NewAccountObject.PutUtfString("Password", PasswordTB.text);
+                NewAccountObject.PutUtfString("Email", EmailTB.text);
+                NewAccountObject.PutUtfString("RegistrationKey", RegistrationKeyTB.text);
+
+                this.SFServer.Send(new ExtensionRequest("$SignUp.Submit", NewAccountObject));
+            }
+            else
+            {
+                Debug.Log("Error Creating Account!");
+            }
         }
         if(buttonName == "BackButton")
         {
@@ -95,6 +120,22 @@ public class LoginConnector : MonoBehaviour
         
     }
 
+    private void OnExtensionResponse(BaseEvent evt)
+    {
+        String ExtensionResponseCode = (String)evt.Params["cmd"];
+
+        if(ExtensionResponseCode == "$SignUp.Submit")
+        {
+            if((bool)evt.Params["success"])
+            {
+                Debug.Log("Success, thanks for registering");
+            }
+            else
+            {
+                Debug.Log("SignUp Error:" + (bool)evt.Params["errorMessage"]);
+            }
+        }
+    }
     private void OnConnection(BaseEvent evt)
     {
         //Default SFS return for a succussful connection is "sucess"
