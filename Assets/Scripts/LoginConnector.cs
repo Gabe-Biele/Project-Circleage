@@ -15,12 +15,19 @@ public class LoginConnector : MonoBehaviour
 {
     //SmartFoxConnectionInfo
     private ConfigData OurConfigData = new ConfigData();
-
     private SmartFox SFServer;
+
+    //UI Elements
+    private GameObject LoginPanel;
+    private GameObject RegisterPanel;
 
 	// Use this for initialization
 	void Start ()
     {
+        LoginPanel = GameObject.Find("LoginBox");
+        RegisterPanel = GameObject.Find("RegisterBox");
+        RegisterPanel.SetActive(false);
+
         SFServer = new SmartFox();
 
         //Set our basic default connection parameters
@@ -49,13 +56,41 @@ public class LoginConnector : MonoBehaviour
             SFServer.ProcessEvents();
         }
 	}
+    public void Button_Clicked(String buttonName)
+    {
+        if(buttonName == "LoginButton")
+        {
 
+        }
+        if(buttonName == "RegisterButton")
+        {
+            this.RegisterPanel.SetActive(true);
+            this.LoginPanel.SetActive(false);
+        }
+        if(buttonName == "ExitButton")
+        {
+            SFServer.Disconnect();
+            SFServer.RemoveAllEventListeners();
+            Application.Quit();
+        }
+        if(buttonName == "CreateButton")
+        {
+
+        }
+        if(buttonName == "BackButton")
+        {
+            this.LoginPanel.SetActive(true);
+            this.RegisterPanel.SetActive(false);
+        }
+    }
     public void LoginButton_Clicked()
     {
-        InputField UsernameTB = GameObject.Find("UsernameTB").GetComponent<InputField>();
+        this.RegisterPanel.SetActive(true);
+        this.LoginPanel.SetActive(false);
+        /*InputField UsernameTB = GameObject.Find("UsernameTB").GetComponent<InputField>();
         InputField PasswordTB = GameObject.Find("PasswordTB").GetComponent<InputField>();
         Debug.Log(UsernameTB.text);
-        Debug.Log(PasswordTB.text);
+        Debug.Log(PasswordTB.text);*/
 
         
     }
