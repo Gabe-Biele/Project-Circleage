@@ -10,16 +10,21 @@ using Sfs2X.Requests;
 using Sfs2X.Requests.MMO;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LoginConnector : MonoBehaviour
 {
     //SmartFoxConnectionInfo
     private ConfigData OurConfigData = new ConfigData();
     private SmartFox SFServer;
+    private SmartFoxConnection OurSmartFoxConnection;
 
     //UI Elements
     private GameObject LoginPanel;
     private GameObject RegisterPanel;
+
+    //Static Elements
+    private static String GAME_ZONE = "ProjectCircleage";
 
 	// Use this for initialization
 	void Start ()
@@ -33,7 +38,7 @@ public class LoginConnector : MonoBehaviour
         //Set our basic default connection parameters
         this.OurConfigData.Host = "biele.us";
         this.OurConfigData.Port = 9933;
-        this.OurConfigData.Zone = "ProjectCircleage";
+        this.OurConfigData.Zone = GAME_ZONE;
 
         // Set ThreadSafeMode explicitly, or Windows Store builds will get a wrong default value (false)
         SFServer.ThreadSafeMode = true;
@@ -42,8 +47,6 @@ public class LoginConnector : MonoBehaviour
         SFServer.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
         SFServer.AddEventListener(SFSEvent.LOGIN, OnLogin);
         SFServer.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
-        SFServer.AddEventListener(SFSEvent.ROOM_JOIN, OnRoomJoin);
-        SFServer.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnRoomJoinError);
 
         SFServer.Connect(this.OurConfigData);
     }
@@ -60,7 +63,13 @@ public class LoginConnector : MonoBehaviour
     {
         if(buttonName == "LoginButton")
         {
-
+            InputField UsernameTB = GameObject.Find("UsernameTB").GetComponent<InputField>();
+            InputField PasswordTB = GameObject.Find("PasswordTB").GetComponent<InputField>();
+            Debug.Log("Username: " + UsernameTB.text);
+            Debug.Log("Password: " + PasswordTB.text);
+            String EncryptedPW = PasswordUtil.MD5Password(PasswordTB.text);
+            SFServer.Send(new LoginRequest(UsernameTB.text, EncryptedPW, GAME_ZONE));
+            SFServer.Send(new JoinRoomRequest("Game"));
         }
         if(buttonName == "RegisterButton")
         {
@@ -76,7 +85,6 @@ public class LoginConnector : MonoBehaviour
         }
         if(buttonName == "CreateButton")
         {
-            SFSObject NewAccountObject = new SFSObject();
             InputField UsernameTB = GameObject.Find("UsernameTB").GetComponent<InputField>();
             InputField PasswordTB = GameObject.Find("PasswordTB").GetComponent<InputField>();
             InputField ConfirmPasswordTB = GameObject.Find("ConfirmPasswordTB").GetComponent<InputField>();
@@ -90,7 +98,7 @@ public class LoginConnector : MonoBehaviour
 
             if(PasswordTB.text == ConfirmPasswordTB.text)
             {
-                //String EncryptedPW = PasswordUtil.MD5Password(PasswordTB.text);
+                SFSObject NewAccountObject = new SFSObject();
                 NewAccountObject.PutUtfString("Username", UsernameTB.text);
                 NewAccountObject.PutUtfString("PasswordHash", PasswordTB.text);
                 NewAccountObject.PutUtfString("Email", EmailTB.text);
@@ -144,7 +152,7 @@ public class LoginConnector : MonoBehaviour
         {
             Debug.Log("Connected to Game Server!");
             // Save reference to the SmartFox instance in a static field, to share it among different scenes
-            SmartFoxConnection.GetInstance().SetSmartFoxServer(SFServer);
+            SmartFoxConnection.Connection = SFServer;
         }
         else
         {
@@ -161,18 +169,15 @@ public class LoginConnector : MonoBehaviour
     private void OnLogin(BaseEvent evt)
     {
         Debug.Log("Login Success! You are now in " + SFServer.CurrentZone);
+        if(SFServer.CurrentZone == GAME_ZONE)
+        {
+            //SceneManager.LoadScene("CharacterSelection"); To be implemented later
+            SFServer.RemoveAllEventListeners();
+            SceneManager.LoadScene("GameWorld");
+        }
     }
     private void OnLoginError(BaseEvent evt)
     {
         Debug.Log("Login Error:" + evt.Params["errorMessage"]);
     }
-    private void OnRoomJoin(BaseEvent evt)
-    {
-        throw new NotImplementedException();
-    }
-    private void OnRoomJoinError(BaseEvent evt)
-    {
-        throw new NotImplementedException();
-    }
-
 }
