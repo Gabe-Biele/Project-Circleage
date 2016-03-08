@@ -171,9 +171,8 @@ public class LoginConnector : MonoBehaviour
         Debug.Log("Login Success! You are now in " + SFServer.CurrentZone);
         if(SFServer.CurrentZone == GAME_ZONE)
         {
-            //SceneManager.LoadScene("CharacterSelection"); To be implemented later
+            SceneManager.LoadScene("CharacterSelection");
             SFServer.RemoveAllEventListeners();
-            SceneManager.LoadScene("GameWorld");
         }
     }
     private void OnLoginError(BaseEvent evt)
