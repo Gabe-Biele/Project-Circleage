@@ -30,13 +30,4 @@ public class GameUI : MonoBehaviour
     {
         Application.Quit();
     }
-    public void OnApplicationQuit()
-    {
-        ISFSObject ObjectIn = new SFSObject();
-        ObjectIn.PutUtfString("junk", "junkval");
-        SFServer.Send(new ExtensionRequest("DespawnPlayer", ObjectIn));
-        SFServer.Disconnect();
-        SFServer.RemoveAllEventListeners();
-        Debug.Log("Quitting...");
-    }
 }

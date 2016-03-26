@@ -1,10 +1,12 @@
 ﻿using System;
 using UnityEngine;
 using Sfs2X;
-
+using Sfs2X.Requests;
+using Sfs2X.Entities.Data;
 
 class SmartFoxConnection : MonoBehaviour
 {
+    public static bool NeedsDespawn;
     private static SmartFox SFServer;
     private static SmartFoxConnection OurInstance;
 

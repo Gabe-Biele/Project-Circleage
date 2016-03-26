@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class LocalPlayerController : MonoBehaviour
 {
+    private string PlayerName = "";
     private float PlayerSpeed = 10;
     private float RotationSpeed = 40;
     private Rigidbody PlayerRB;
@@ -36,5 +37,13 @@ public class LocalPlayerController : MonoBehaviour
     public float GetRotation()
     {
         return this.transform.localEulerAngles.y;
+    }
+    public string GetName()
+    {
+        return this.PlayerName;
+    }
+    public void SetName(string aPN)
+    {
+        this.PlayerName = aPN;
     }
 }
