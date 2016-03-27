@@ -93,6 +93,11 @@ public class CharacterSelection : MonoBehaviour
             this.SFServer.RemoveAllEventListeners();
         }
     }
+    public void CreateButton_Click()
+    {
+        SceneManager.LoadScene("CharacterCreation");
+        this.SFServer.RemoveAllEventListeners();
+    }
     public void CharacterPanel_Clicked(GameObject aCharacterPanel)
     {
         for(int i = 0; i < this.CharacterPanel.Count; i++)

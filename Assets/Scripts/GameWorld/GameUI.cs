@@ -7,7 +7,6 @@ using Sfs2X.Requests;
 
 public class GameUI : MonoBehaviour
 {
-    private SmartFox SFServer;
 
     // Use this for initialization
     void Start ()
@@ -17,7 +16,6 @@ public class GameUI : MonoBehaviour
             SceneManager.LoadScene("Login");
             return;
         }
-        SFServer = SmartFoxConnection.Connection;
     }
 	
 	// Update is called once per frame
