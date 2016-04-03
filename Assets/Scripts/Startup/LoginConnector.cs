@@ -22,6 +22,8 @@ public class LoginConnector : MonoBehaviour
     //UI Elements
     private GameObject LoginPanel;
     private GameObject RegisterPanel;
+    private InputField UsernameTB;
+    private InputField PasswordTB;
 
     //Static Elements
     private static String GAME_ZONE = "ProjectCircleage";
@@ -32,6 +34,10 @@ public class LoginConnector : MonoBehaviour
         LoginPanel = GameObject.Find("LoginBox");
         RegisterPanel = GameObject.Find("RegisterBox");
         RegisterPanel.SetActive(false);
+
+        UsernameTB = GameObject.Find("UsernameTB").GetComponent<InputField>();
+        PasswordTB = GameObject.Find("PasswordTB").GetComponent<InputField>();
+        UsernameTB.Select();
 
         SFServer = new SmartFox();
 
@@ -54,6 +60,17 @@ public class LoginConnector : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            if(this.UsernameTB.isFocused)
+            {
+                this.PasswordTB.Select();
+            }
+            else
+            {
+                this.UsernameTB.Select();
+            }
+        }
         if(SFServer != null)
         {
             SFServer.ProcessEvents();
@@ -63,8 +80,6 @@ public class LoginConnector : MonoBehaviour
     {
         if(buttonName == "LoginButton")
         {
-            InputField UsernameTB = GameObject.Find("UsernameTB").GetComponent<InputField>();
-            InputField PasswordTB = GameObject.Find("PasswordTB").GetComponent<InputField>();
             Debug.Log("Username: " + UsernameTB.text);
             Debug.Log("Password: " + PasswordTB.text);
             String EncryptedPW = PasswordUtil.MD5Password(PasswordTB.text);
@@ -125,7 +140,6 @@ public class LoginConnector : MonoBehaviour
         InputField PasswordTB = GameObject.Find("PasswordTB").GetComponent<InputField>();
         Debug.Log(UsernameTB.text);
         Debug.Log(PasswordTB.text);*/
-
         
     }
 
