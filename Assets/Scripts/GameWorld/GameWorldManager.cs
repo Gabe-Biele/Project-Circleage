@@ -137,7 +137,7 @@ public class GameWorldManager : MonoBehaviour
                     PlayerDictionary[aCharacterName].GetComponent<RemotePlayerController>().SetRotation(Rotation);
                 }
             }
-            if(ResponseType == "MovementUpdate")
+            /*if(ResponseType == "MovementUpdate")
             {
                 string aCharacterName = ObjectIn.GetUtfString("CharacterName");
                 if(aCharacterName == this.OurLPC.GetName())
@@ -151,7 +151,7 @@ public class GameWorldManager : MonoBehaviour
                 {
                     //
                 }
-            }
+            }*/
         }
         catch(Exception e)
         {

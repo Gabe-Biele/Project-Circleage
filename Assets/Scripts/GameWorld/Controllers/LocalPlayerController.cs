@@ -16,10 +16,10 @@ public class LocalPlayerController : MonoBehaviour
     private Animator MecAnim;
     private static int RUN_ANIMATION = Animator.StringToHash("IsRunning");
 
-    private float[] Destination;
+    /*private float[] Destination;
     private Vector3 DestinationPosition;
     private Quaternion DestinationRotation;
-    private bool IsMoving = false;
+    private bool IsMoving = false;*/
 
     void Start()
     {
@@ -31,7 +31,7 @@ public class LocalPlayerController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        /*if(Input.GetMouseButtonDown(0))
         {
             if(this.UpdateDestination())
             {
@@ -50,7 +50,8 @@ public class LocalPlayerController : MonoBehaviour
                 this.MecAnim.SetBool(RUN_ANIMATION, false);
                 IsMoving = false;
             }
-        }
+        }*/
+
         if(Input.GetKeyDown(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, true);
         if(Input.GetKeyUp(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, false);
 
@@ -91,7 +92,7 @@ public class LocalPlayerController : MonoBehaviour
     {
         this.PlayerName = aPN;
     }
-    private bool UpdateDestination()
+    /*private bool UpdateDestination()
     {
         RaycastHit ourRaycastTarget;
         Ray ourRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -120,5 +121,5 @@ public class LocalPlayerController : MonoBehaviour
         DestinationRotation.z = 0f;
 
         IsMoving = true;
-    }
+    }*/
 }
