@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -60,20 +58,29 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="M3DIMPORT_DLL">
+      <HintPath>Assets\MORPH3D\scripts\Plugins\M3DIMPORT_DLL.dll</HintPath>
+    </Reference>
+    <Reference Include="M3D_DLL">
+      <HintPath>Assets\MORPH3D\scripts\Plugins\M3D_DLL.dll</HintPath>
     </Reference>
     <Reference Include="SmartFox2X">
       <HintPath>Assets\Plugins\SmartFox2X.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Project-Circleage.CSharp.Plugins.csproj">
+      <Project>{028865FE-5C8B-BB29-0DFE-2AFB4FCC8C68}</Project>
+      <Name>Project-Circleage.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\MORPH3D\Vendor\Unity\Shaders\Hair\HairRenderer.cs" />
+    <Compile Include="Assets\MORPH3D\scripts\AttachmentPoints\SinglePropDefaultLayoutExample.cs" />
+    <Compile Include="Assets\MORPH3D\scripts\AttachmentPoints\SpiralPropLayout.cs" />
     <Compile Include="Assets\Scripts\GameWorld\CameraController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\LocalPlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\RemotePlayerController.cs" />
@@ -83,6 +90,29 @@
     <Compile Include="Assets\Scripts\Startup\CharacterSelection.cs" />
     <Compile Include="Assets\Scripts\Startup\LoginConnector.cs" />
     <Compile Include="Assets\Scripts\Util\SmartFoxConnection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
+    <None Include="Assets\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
+    <None Include="Assets\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
+    <None Include="Assets\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard&apos;s\Wizard_motiondata.xml" />
+    <None Include="Assets\MORPH3D\Readme.txt" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_Standard.shader" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_UnityStandardCore.cginc" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_UnityStandardInput.cginc" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_Universal.shader" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_setup.cginc" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Skin\Volund_StandardSpecularCharacter.shader" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Skin\Volund_UnityStandardCore.cginc" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Skin\Volund_UnityStandardInput.cginc" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Standard\Standard-2pass-doublesided-half depth.shader" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Standard\Standard-2pass-doublesided.shader" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Standard\Standard-doublesided.shader" />
+    <None Include="Assets\MORPH3D\Vendor\Unity\Shaders\Standard\StandardSpecular-doublesided.shader" />
+    <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+    <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
+    <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
+    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
