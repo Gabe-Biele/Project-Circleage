@@ -137,6 +137,21 @@ public class GameWorldManager : MonoBehaviour
                     PlayerDictionary[aCharacterName].GetComponent<RemotePlayerController>().SetRotation(Rotation);
                 }
             }
+            if(ResponseType == "MovementUpdate")
+            {
+                string aCharacterName = ObjectIn.GetUtfString("CharacterName");
+                if(aCharacterName == this.OurLPC.GetName())
+                {
+                    Debug.Log("Moving...");
+                    float[] LocationArray = ObjectIn.GetFloatArray("Location");
+                    Debug.Log("X: " + LocationArray[0] + "      Y: " + LocationArray[1] + "      Z: " + LocationArray[2]);
+                    this.OurLPC.MoveToDestination();
+                }
+                else if(PlayerDictionary.ContainsKey(aCharacterName))
+                {
+                    //
+                }
+            }
         }
         catch(Exception e)
         {
@@ -152,7 +167,7 @@ public class GameWorldManager : MonoBehaviour
     private void SpawnRemotePlayer(String aCharacterName, float[] LocationArray, float Rotation)
     {
         //Instantiate RemotePlayerObject
-        GameObject aRemotePlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerCube", typeof(GameObject)));
+        GameObject aRemotePlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerBasic", typeof(GameObject)));
         aRemotePlayer.name = "GameCharacter_" + aCharacterName;
         aRemotePlayer.AddComponent<RemotePlayerController>();
         aRemotePlayer.transform.position = new Vector3(LocationArray[0], LocationArray[1], LocationArray[2]);
@@ -166,13 +181,14 @@ public class GameWorldManager : MonoBehaviour
     {
         Debug.Log(Loc[0] + "      " + Loc[1] + "      " + Loc[2]);
         // Lets spawn our local player model
-        LocalPlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerCube", typeof(GameObject)));
+        LocalPlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerBasic", typeof(GameObject)));
         LocalPlayer.transform.position = new Vector3(Loc[0], Loc[1], Loc[2]);
         LocalPlayer.transform.rotation = Quaternion.identity;
 
         // Since this is the local player, lets add a controller and fix the camera
         LocalPlayer.AddComponent<LocalPlayerController>();
         OurLPC = LocalPlayer.GetComponent<LocalPlayerController>();
+        OurLPC.SetName(aCharacterName);
         LocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
         Camera.main.transform.parent = LocalPlayer.transform;
         Camera.main.GetComponent<CameraController>().target = LocalPlayer;

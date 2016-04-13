@@ -22,6 +22,7 @@ public class LoginConnector : MonoBehaviour
     //UI Elements
     private GameObject LoginPanel;
     private GameObject RegisterPanel;
+    private GameObject MessageText;
     private InputField UsernameTB;
     private InputField PasswordTB;
 
@@ -34,6 +35,8 @@ public class LoginConnector : MonoBehaviour
         LoginPanel = GameObject.Find("LoginBox");
         RegisterPanel = GameObject.Find("RegisterBox");
         RegisterPanel.SetActive(false);
+        MessageText = GameObject.Find("MessageText");
+        MessageText.SetActive(false);
 
         UsernameTB = GameObject.Find("UsernameTB").GetComponent<InputField>();
         PasswordTB = GameObject.Find("PasswordTB").GetComponent<InputField>();
@@ -53,6 +56,7 @@ public class LoginConnector : MonoBehaviour
         SFServer.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
         SFServer.AddEventListener(SFSEvent.LOGIN, OnLogin);
         SFServer.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
+        SFServer.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtensionResponse);
 
         SFServer.Connect(this.OurConfigData);
     }
@@ -123,7 +127,11 @@ public class LoginConnector : MonoBehaviour
             }
             else
             {
-                Debug.Log("Error Creating Account!");
+                if(!MessageText.activeInHierarchy)
+                {
+                    MessageText.SetActive(true);
+                }
+                MessageText.GetComponent<Text>().text = "Passwords do not match! Please check and try again.";
             }
         }
         if(buttonName == "BackButton")
@@ -145,17 +153,25 @@ public class LoginConnector : MonoBehaviour
 
     private void OnExtensionResponse(BaseEvent evt)
     {
-        String ExtensionResponseCode = (String)evt.Params["cmd"];
-
-        if(ExtensionResponseCode == "$SignUp.Submit")
+        String ResponseType = (string)evt.Params["cmd"];
+        Debug.Log("Received Response: " + ResponseType);
+        ISFSObject ObjectIn = (SFSObject)evt.Params["params"];
+        if(ResponseType == "$SignUp.Submit")
         {
-            if((bool)evt.Params["success"])
+
+            if(!MessageText.activeInHierarchy)
+            {
+                MessageText.SetActive(true);
+            }
+            if(ObjectIn.GetBool("success"))
             {
                 Debug.Log("Success, thanks for registering");
+                MessageText.GetComponent<Text>().text = "Success, thanks for registering";
             }
             else
             {
-                Debug.Log("SignUp Error:" + (bool)evt.Params["errorMessage"]);
+                Debug.Log("SignUp Error:" + ObjectIn.GetUtfString("errorMessage"));
+                MessageText.GetComponent<Text>().text = "SignUp Error: " + ObjectIn.GetUtfString("errorMessage");
             }
         }
     }
