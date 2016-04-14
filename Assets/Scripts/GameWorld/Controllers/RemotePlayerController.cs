@@ -7,13 +7,17 @@ public class RemotePlayerController : MonoBehaviour
     private Rigidbody PlayerRB;
 
     private bool PlayerMoving;
+    private Animator MecAnim;
+    private static int RUN_ANIMATION = Animator.StringToHash("IsRunning");
 
-	// Use this for initialization
-	void Start ()
+
+    // Use this for initialization
+    void Start ()
     {
         this.PlayerMoving = false;
         this.PlayerRB = GetComponent<Rigidbody>();
-	}
+        this.MecAnim = this.GetComponentInChildren<Animator>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -26,6 +30,8 @@ public class RemotePlayerController : MonoBehaviour
     public void SetPlayerMoving(bool Moving)
     {
         this.PlayerMoving = Moving;
+        //Sets the player animation based on moving 
+        this.MecAnim.SetBool(RUN_ANIMATION, Moving);
     }
     public void SetRotation(float Rot)
     {
