@@ -5,16 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3E05ADE8-F2BC-3234-6D74-335DB8668FC7}</ProjectGuid>
+    <ProjectGuid>{6B3D5AFC-1E7F-0458-86B2-2FE04D5FEB0F}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
     <RootNamespace></RootNamespace>
@@ -52,14 +52,41 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Library\UnityAssemblies\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.EditorTestsRunner">
+      <HintPath>Library\UnityAssemblies\UnityEditor.EditorTestsRunner.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\UnityAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TreeEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.TreeEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="M3DIMPORT_DLL">
       <HintPath>Assets\AssetStoreTools\MORPH3D\scripts\Plugins\M3DIMPORT_DLL.dll</HintPath>
@@ -72,61 +99,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\HairRenderer.cs" />
-    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\AttachmentPoints\SinglePropDefaultLayoutExample.cs" />
-    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\AttachmentPoints\SpiralPropLayout.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Characters\RollerBall\Scripts\Ball.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Characters\RollerBall\Scripts\BallUserControl.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\ActivateTrigger.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\AutoMoveAndRotate.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\CameraRefocus.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\CurveControlledBob.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\DragRigidbody.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\DynamicShadowSettings.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\EventSystemChecker.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\FOVKick.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\FPSCounter.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\FollowTarget.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\ForcedReset.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\LerpControlledBob.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\ObjectResetter.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\PlatformSpecificContent.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\SimpleActivatorMenu.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\SimpleMouseRotator.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\SmoothFollow.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\TimedObjectActivator.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\TimedObjectDestructor.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\WaypointCircuit.cs" />
-    <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\WaypointProgressTracker.cs" />
-    <Compile Include="Assets\Scripts\GameWorld\Controllers\CameraController.cs" />
-    <Compile Include="Assets\Scripts\GameWorld\Controllers\LocalPlayerController.cs" />
-    <Compile Include="Assets\Scripts\GameWorld\Controllers\RemotePlayerController.cs" />
-    <Compile Include="Assets\Scripts\GameWorld\GameUI.cs" />
-    <Compile Include="Assets\Scripts\GameWorld\GameWorldManager.cs" />
-    <Compile Include="Assets\Scripts\Startup\CharacterCreation.cs" />
-    <Compile Include="Assets\Scripts\Startup\CharacterSelection.cs" />
-    <Compile Include="Assets\Scripts\Startup\LoginConnector.cs" />
-    <Compile Include="Assets\Scripts\Util\SmartFoxConnection.cs" />
+    <ProjectReference Include="Project-Circleage.CSharp.csproj">
+      <Project>{3E05ADE8-F2BC-3234-6D74-335DB8668FC7}</Project>
+      <Name>Project-Circleage.CSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Editor\HairShaderGUI.cs" />
+    <Compile Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Skin\Editor\VolundMultiStandardShaderGUI.cs" />
+    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\Editor\M3DBlendshapeNamesEditor.cs" />
+    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\Editor\M3DCharacterManagerEditor.cs" />
+    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\Editor\MaterialImporter.cs" />
+    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\Editor\SearchableWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
