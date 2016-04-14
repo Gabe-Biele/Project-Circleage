@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour
 {
     public GameObject target;
     public float ourCameraDragSpeed = 2;
+    public bool inCombat = true;
 
     // Use this for initialization
     void Start ()
