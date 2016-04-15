@@ -57,7 +57,11 @@ public class LocalPlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.W))
         {
+            CameraController cameraControllerObj= (CameraController) Camera.main.GetComponent("CameraController");
+            this.PlayerRB.transform.Rotate(0, Camera.main.transform.localRotation.eulerAngles.y-6, 0);
+            cameraControllerObj.ResetCamera();
             this.PlayerRB.MovePosition(transform.position + (transform.forward * Time.deltaTime * PlayerSpeed));
+            
         }
 
         // Left/right makes player model rotate around own axis

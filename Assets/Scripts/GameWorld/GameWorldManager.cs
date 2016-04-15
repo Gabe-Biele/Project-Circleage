@@ -77,7 +77,7 @@ public class GameWorldManager : MonoBehaviour
         try
         {
             String ResponseType = (string)evt.Params["cmd"];
-            Debug.Log("Received Response: " + ResponseType);
+            //Debug.Log("Received Response: " + ResponseType);
             ISFSObject ObjectIn = (SFSObject)evt.Params["params"];
             if(ResponseType == "SpawnPlayer")
             {
@@ -118,7 +118,7 @@ public class GameWorldManager : MonoBehaviour
                 {
                     float[] LocationArray = ObjectIn.GetFloatArray("Location");
                     bool IsMoving = ObjectIn.GetBool("IsMoving");
-                    Debug.Log("X: " + LocationArray[0] + "      Y: " + LocationArray[1] + "      Z: " + LocationArray[2]);
+                    //Debug.Log("X: " + LocationArray[0] + "      Y: " + LocationArray[1] + "      Z: " + LocationArray[2]);
                     PlayerDictionary[aCharacterName].GetComponent<RemotePlayerController>().SetPlayerMoving(IsMoving);
                     PlayerDictionary[aCharacterName].transform.position = new Vector3(LocationArray[0], LocationArray[1], LocationArray[2]);
                 }
@@ -179,7 +179,7 @@ public class GameWorldManager : MonoBehaviour
     }
     private void SpawnLocalPlayer(String aCharacterName, float[] Loc)
     {
-        Debug.Log(Loc[0] + "      " + Loc[1] + "      " + Loc[2]);
+        //Debug.Log(Loc[0] + "      " + Loc[1] + "      " + Loc[2]);
         // Lets spawn our local player model
         LocalPlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerBasic", typeof(GameObject)));
         LocalPlayer.transform.position = new Vector3(Loc[0], Loc[1], Loc[2]);
