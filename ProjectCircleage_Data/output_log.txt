@@ -2,75 +2,29 @@ Initialize engine version: 5.3.2f1 (e87ab445ead0)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GTX 670 (ID=0x1189)
+    Renderer: NVIDIA GeForce GTX 770 (ID=0x1184)
     Vendor:   NVIDIA
-    VRAM:     3072 MB
+    VRAM:     1989 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\SmartFox2X.dll (this message is harmless)
-Loading E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\SmartFox2X.dll into Unity Child Domain
-- Completed reload, in  0.040 seconds
-Platform assembly: E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: E:\Unity\Gabe\ProjectCircleage_GIT\ProjectCircleage_Data\Managed\System.dll (this message is harmless)
-desktop: 1920x1080 60Hz; virtual: 3840x1080 at -1920,0
+Platform assembly: C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\SmartFox2X.dll (this message is harmless)
+Loading C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\SmartFox2X.dll into Unity Child Domain
+- Completed reload, in  0.188 seconds
+Platform assembly: C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\mdimi\Documents\Circleage2\Project-Circleage\ProjectCircleage_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 5200x1126 at -1360,0
 <RI> Initializing input.
+<RI.Hid> Failed to create device file:
+ 2 The system cannot find the file specified.
+
+ 
+(Filename:  Line: 54)
+
 <RI> Input initialized.
-<RI> Initialized touch support.
-UnloadTime: 0.371654 ms
-Setting up 1 worker threads for Enlighten.
-  Thread -> id: 1794 -> priority: 1 
-Connected to Game Server!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
-
-Username: valitri
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
-
-Password: $3l3ct1v3!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
-
-Login Success! You are now in ProjectCircleage
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
-
-Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.688771 ms
-
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 199.
-Total: 0.209308 ms (FindLiveObjects: 0.014928 ms CreateObjectMapping: 0.008086 ms MarkObjects: 0.179140 ms  DeleteObjects: 0.006220 ms)
-
-Received Response: CharacterList
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
-
-Parent of RectTransform is being set with parent property. Consider using the SetParent method instead, with the worldPositionStays argument set to false. This will retain local orientation and scale rather than world orientation and scale, which can prevent common UI scaling issues.
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
-
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.337132 ms
-
-Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 330.
-Total: 0.300744 ms (FindLiveObjects: 0.017416 ms CreateObjectMapping: 0.009641 ms MarkObjects: 0.186915 ms  DeleteObjects: 0.086460 ms)
-
-Received Response: SpawnPlayer
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
-
-True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
-
--779.458      155.008      -669.108
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
-

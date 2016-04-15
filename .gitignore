@@ -28,3 +28,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Library/assetDatabase3
+ProjectCircleage_Data/output_log.txt

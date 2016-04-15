@@ -42,7 +42,6 @@ public class CameraController : MonoBehaviour
             distance++;
             distance = Mathf.Clamp(distance, 4.0f, 13.0f);
         }
-
     }
 
     void LateUpdate()
@@ -69,7 +68,6 @@ public class CameraController : MonoBehaviour
         if (!Input.GetMouseButton(1))
         {
             currentX = 5.0f;
-            Debug.Log("fuck");
         }
     }
 }
