@@ -129,12 +129,15 @@ public class GameWorldManager : MonoBehaviour
 
         // Since this is the local player, lets add a controller and fix the camera
         LocalPlayer.AddComponent<LocalPlayerController>();
-        ourLPC = LocalPlayer.GetComponent<LocalPlayerController>();
-        ourLPC.SetName(aCharacterName);
+        OurLPC = LocalPlayer.GetComponent<LocalPlayerController>();
+        OurLPC.SetName(aCharacterName);
         LocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
         Camera.main.transform.parent = LocalPlayer.transform;
-        Camera.main.GetComponent<CameraController>().target = LocalPlayer;
-        Camera.main.transform.localPosition = new Vector3(0, 6, -12);
+        GameObject cameraAttach = new GameObject();
+        cameraAttach.transform.parent = LocalPlayer.transform;
+        cameraAttach.transform.localPosition = new Vector3(0, 2.5f, 0);
+        Camera.main.GetComponent<CameraController>().target = cameraAttach;
+        Camera.main.transform.localPosition = new Vector3(0, 5, -12);
     }
     public LocalPlayerController getLPC()
     {
