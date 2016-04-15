@@ -9,8 +9,8 @@ public class CameraController : MonoBehaviour
     private Camera cam;
     public float ourCameraDragSpeed = 2;
     public bool inCombat = true;
-    private float maxDistance = 13.0f;
-    private float currentX = 6.0f;
+    private float distance = 13.0f;
+    private float currentX = 5.0f;
     private float currentY = 12.0f;
     private float sensitivityX = 4.0f;
     private float sensitivityY = 4.0f;
@@ -28,12 +28,21 @@ public class CameraController : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            currentX += Input.GetAxis("Mouse X");
             currentY += Input.GetAxis("Mouse Y");
-
+            currentX += Input.GetAxis("Mouse X");
             currentY = Mathf.Clamp(currentY, 10.0f, 80.0f);
-            
         }
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            distance--;
+            distance = Mathf.Clamp(distance, 4.0f, 13.0f);
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            distance++;
+            distance = Mathf.Clamp(distance, 4.0f, 13.0f);
+        }
+
     }
 
     void LateUpdate()
@@ -45,20 +54,22 @@ public class CameraController : MonoBehaviour
         //    target.transform.Rotate(0, horizontal, 0); 
         //    transform.Translate(0, -vertical, 0);
         //}
-        //if(target != null)
-        //{
-        //    transform.LookAt(target.transform);
-        //}
 
-        Vector3 dir = new Vector3(0, 0, -maxDistance);
+        Vector3 dir = new Vector3(0, 0, -distance);
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
         camTransform.localPosition = rotation * dir;
-        camTransform.LookAt(target.transform);
+        if (target != null)
+        {
+            camTransform.LookAt(target.transform);
+        }
     }
 
     public void ResetCamera()
     {
-        currentX = 6.0f;
-        currentY = 12.0f;
+        if (!Input.GetMouseButton(1))
+        {
+            currentX = 5.0f;
+            Debug.Log("fuck");
+        }
     }
 }

@@ -192,7 +192,7 @@ public class GameWorldManager : MonoBehaviour
         LocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
         Camera.main.transform.parent = LocalPlayer.transform;
         Camera.main.GetComponent<CameraController>().target = LocalPlayer;
-        Camera.main.transform.localPosition = new Vector3(0, 6, -12);
+        Camera.main.transform.localPosition = new Vector3(0, 5, -12);
     }
 
 }
