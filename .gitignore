@@ -16,9 +16,9 @@ sysinfo.txt # crash report file
 [Ee]xported[Oo]bj/
 .vs/
 *.booproj
-*.csproj
+#*.csproj
 *.pidb
-*.sln
+#*.sln
 *.suo
 *.svd
 *.tmp
