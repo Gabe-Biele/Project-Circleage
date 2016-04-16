@@ -16,6 +16,11 @@ public class LocalPlayerController : MonoBehaviour
     private Animator MecAnim;
     private static int RUN_ANIMATION = Animator.StringToHash("IsRunning");
 
+    /*private float[] Destination;
+    private Vector3 DestinationPosition;
+    private Quaternion DestinationRotation;
+    private bool IsMoving = false;*/
+
     void Start()
     {
         SFServer = SmartFoxConnection.Connection;
@@ -26,39 +31,43 @@ public class LocalPlayerController : MonoBehaviour
 
     void Update()
     {
-        GameUI theUI = (GameUI) FindObjectOfType(typeof(GameUI));
-        if (!theUI.GetChatTB().isFocused)
+        /*if(Input.GetMouseButtonDown(0))
         {
-
-            if (Input.GetKeyDown(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, true);
-            if (Input.GetKeyUp(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, false);
-
-            if (Input.GetKey(KeyCode.W))
+            if(this.UpdateDestination())
             {
-                CameraController cameraControllerObj = (CameraController)Camera.main.GetComponent("CameraController");
-                this.PlayerRB.transform.Rotate(0, Camera.main.transform.localRotation.eulerAngles.y, 0);
-                cameraControllerObj.ResetCamera();
-                this.PlayerRB.MovePosition(transform.position + (transform.forward * Time.deltaTime * PlayerSpeed));
+                ISFSObject ObjectIn = new SFSObject();
+                ObjectIn.PutFloatArray("Destination", Destination);
+                SFServer.Send(new ExtensionRequest("MovementUpdate", ObjectIn));
             }
-            //Cursor hiding/showing
-            if(Input.GetKeyDown(KeyCode.LeftAlt))
+        }
+        if(IsMoving)
+        {
+            this.MecAnim.SetBool(RUN_ANIMATION, true);
+            transform.rotation = Quaternion.Slerp(transform.rotation, DestinationRotation, Time.deltaTime * 10);
+            this.PlayerRB.velocity = (DestinationPosition - transform.position).normalized * PlayerSpeed;
+            if(Vector3.Distance(this.transform.position, DestinationPosition) < 1)
             {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                this.MecAnim.SetBool(RUN_ANIMATION, false);
+                IsMoving = false;
             }
-            if (!Input.GetKey(KeyCode.LeftAlt))
-            {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked; 
-            }
+        }*/
 
+        if(Input.GetKeyDown(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, true);
+        if(Input.GetKeyUp(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, false);
 
-            // Left/right makes player model rotate around own axis
-            float rotation = Input.GetAxis("Horizontal");
-            if (rotation != 0)
-            {
-                this.transform.Rotate(Vector3.up, rotation * Time.deltaTime * RotationSpeed);
-            }
+        if(Input.GetKey(KeyCode.W))
+        {
+            CameraController cameraControllerObj = (CameraController)Camera.main.GetComponent("CameraController");
+            this.PlayerRB.transform.Rotate(0, Camera.main.transform.localRotation.eulerAngles.y, 0);
+            cameraControllerObj.ResetCamera();
+            this.PlayerRB.MovePosition(transform.position + (transform.forward * Time.deltaTime * PlayerSpeed));
+        }
+
+        // Left/right makes player model rotate around own axis
+        float rotation = Input.GetAxis("Horizontal");
+        if(rotation != 0)
+        {
+            this.transform.Rotate(Vector3.up, rotation * Time.deltaTime * RotationSpeed);
         }
     }
     void FixedUpdate()
@@ -86,4 +95,34 @@ public class LocalPlayerController : MonoBehaviour
     {
         this.PlayerName = aPN;
     }
+    /*private bool UpdateDestination()
+    {
+        RaycastHit ourRaycastTarget;
+        Ray ourRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if(Physics.Raycast(ourRay, out ourRaycastTarget, 1000))
+        {
+            float[] DesiredLocation = { ourRaycastTarget.point.x, ourRaycastTarget.point.y, ourRaycastTarget.point.z };
+            Destination = DesiredLocation;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public void SetDestination(float[] Destin)
+    {
+        this.Destination = Destin;
+    }
+    public void MoveToDestination()
+    {
+        DestinationPosition = new Vector3(Destination[0], Destination[1], Destination[2]);
+        DestinationRotation = Quaternion.LookRotation(DestinationPosition - transform.position, Vector3.forward);
+
+        DestinationRotation.x = 0f;
+        DestinationRotation.z = 0f;
+
+        IsMoving = true;
+    }*/
 }
