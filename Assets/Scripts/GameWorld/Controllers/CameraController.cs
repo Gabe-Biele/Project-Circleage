@@ -3,71 +3,48 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject target;
-    public Transform lookAt;
-    public Transform camTransform;
-    private Camera cam;
-    public float ourCameraDragSpeed = 2;
-    public bool inCombat = true;
-    private float distance = 13.0f;
-    private float currentX = 5.0f;
-    private float currentY = 12.0f;
-    private float sensitivityX = 4.0f;
-    private float sensitivityY = 4.0f;
+    public Transform cameraTarget;
+    public Vector3 cameraPosition;
 
+    public bool InCombat = true;
+
+    public float deltaX;
+    public float sensitivityX = 5.0f;
+    public float deltaY;
+    public float sensitivityY = 3.0f;
 
     // Use this for initialization
-    void Start()
+    void Start ()
     {
-        camTransform = transform;
-        cam = Camera.main;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButton(1))
-        {
-            currentY += Input.GetAxis("Mouse Y");
-            currentX += Input.GetAxis("Mouse X");
-            currentY = Mathf.Clamp(currentY, 10.0f, 80.0f);
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
-        {
-            distance--;
-            distance = Mathf.Clamp(distance, 4.0f, 13.0f);
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            distance++;
-            distance = Mathf.Clamp(distance, 4.0f, 13.0f);
-        }
-    }
-
+        cameraPosition = new Vector3(0, 4, -8);
+	}
+	
     void LateUpdate()
     {
-        //if(Input.GetMouseButton(1))
-        //{
-        //    float horizontal = Input.GetAxis("Mouse X") * ourCameraDragSpeed;
-        //    float vertical = Input.GetAxis("Mouse Y");
-        //    target.transform.Rotate(0, horizontal, 0); 
-        //    transform.Translate(0, -vertical, 0);
-        //}
-
-        Vector3 dir = new Vector3(0, 0, -distance);
-        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        camTransform.localPosition = rotation * dir;
-        if (target != null)
+        if(cameraTarget != null)
         {
-            camTransform.LookAt(target.transform);
+            if(InCombat)
+            {
+                deltaX = Input.GetAxis("Mouse X");
+                cameraPosition = Quaternion.AngleAxis(deltaX * sensitivityX, Vector3.up) * cameraPosition;
+                deltaY = Input.GetAxis("Mouse Y");
+                cameraPosition = Quaternion.AngleAxis(deltaY * sensitivityY, Vector3.left) * cameraPosition;
+                Vector3 proposedLocalPosition = cameraTarget.localPosition + cameraPosition;
+                if(proposedLocalPosition.y < 0.2f)
+                {
+                    proposedLocalPosition = new Vector3(proposedLocalPosition.x, 0.2f, proposedLocalPosition.z);
+                }
+                this.transform.localPosition = proposedLocalPosition;
+            }
+            this.transform.LookAt(cameraTarget);
         }
     }
-
     public void ResetCamera()
     {
-        if (!Input.GetMouseButton(1))
-        {
-            currentX = 5.0f;
-        }
+        cameraPosition = new Vector3(0, cameraPosition.y, -8);
+    }
+    public void setTarget(GameObject cameraPoint)
+    {
+        cameraTarget = cameraPoint.transform;
     }
 }
