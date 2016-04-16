@@ -34,6 +34,7 @@ public class GameUI : MonoBehaviour
         ChatTB = GameObject.Find("ChatTB").GetComponent<InputField>();
         ChatContent = GameObject.Find("ChatContent");
         ChatTextLabel = new List<GameObject>();
+        ChatTBisFocused = false;
 
         SFServer.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtensionResponse);
     }
@@ -65,14 +66,14 @@ public class GameUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            Debug.Log(this.ChatTB.isFocused);
-            if(this.ChatTBisFocused)
+            if (this.ChatTBisFocused)
             {
                 this.EnterButton_Clicked();
+                this.ChatTBisFocused = false;
             }
             else
             {
@@ -80,6 +81,16 @@ public class GameUI : MonoBehaviour
                 this.ChatTBisFocused = true;
             }
         }
+        if(this.ChatTB.isFocused)
+        {
+            this.ChatTBisFocused = true;
+        }
+        else
+        {
+            this.ChatTBisFocused = false;
+        }
+       // Debug.Log(this.ChatTB.isFocused);
+
     }
     void FixedUpdate()
     {
@@ -101,5 +112,10 @@ public class GameUI : MonoBehaviour
     public void QuitButton_Clicked()
     {
         Application.Quit();
+    }
+
+    public InputField GetChatTB()
+    {
+        return ChatTB;
     }
 }

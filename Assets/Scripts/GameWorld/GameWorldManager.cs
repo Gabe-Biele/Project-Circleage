@@ -53,25 +53,29 @@ public class GameWorldManager : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        GameUI theUI = (GameUI)FindObjectOfType(typeof(GameUI));
+        if (!theUI.GetChatTB().isFocused)
         {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloatArray("Location", ourLPC.GetLocation());
-            ObjectIn.PutBool("IsMoving", true);
-            SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
-        }
-        if(Input.GetKeyUp(KeyCode.W))
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloatArray("Location", ourLPC.GetLocation());
-            ObjectIn.PutBool("IsMoving", false);
-            SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
-        }
-        if(Input.GetKey(KeyCode.W) && Input.GetAxis("Mouse X") != 0)
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloat("Rotation", ourLPC.GetRotation());
-            SFServer.Send(new ExtensionRequest("RotationUpdate", ObjectIn));
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                ISFSObject ObjectIn = new SFSObject();
+                ObjectIn.PutFloatArray("Location", ourLPC.GetLocation());
+                ObjectIn.PutBool("IsMoving", true);
+                SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
+            }
+            if (Input.GetKeyUp(KeyCode.W))
+            {
+                ISFSObject ObjectIn = new SFSObject();
+                ObjectIn.PutFloatArray("Location", ourLPC.GetLocation());
+                ObjectIn.PutBool("IsMoving", false);
+                SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
+            }
+            if (Input.GetKey(KeyCode.W) && Input.GetAxis("Mouse X") != 0)
+            {
+                ISFSObject ObjectIn = new SFSObject();
+                ObjectIn.PutFloat("Rotation", ourLPC.GetRotation());
+                SFServer.Send(new ExtensionRequest("RotationUpdate", ObjectIn));
+            }
         }
     }
     void FixedUpdate()
@@ -139,6 +143,7 @@ public class GameWorldManager : MonoBehaviour
         cameraAttach.transform.parent = LocalPlayer.transform;
         cameraAttach.transform.localPosition = new Vector3(1f, 2.5f, 1.0f);
         Camera.main.GetComponent<CameraController>().setTarget(cameraAttach);
+        Cursor.visible = false;
     }
     public void spawnNPC(String aNPCName, float[] location)
     {

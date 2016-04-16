@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
     {
         if(cameraTarget != null)
         {
-            if(InCombat)
+            if(InCombat && !Input.GetKey(KeyCode.LeftAlt))
             {
                 deltaX = Input.GetAxis("Mouse X");
                 cameraPosition = Quaternion.AngleAxis(deltaX * sensitivityX, Vector3.up) * cameraPosition;
