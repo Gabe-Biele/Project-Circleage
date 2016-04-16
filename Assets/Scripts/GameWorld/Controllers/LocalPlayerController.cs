@@ -30,7 +30,6 @@ public class LocalPlayerController : MonoBehaviour
         if (!theUI.GetChatTB().isFocused)
         {
 
-            //Forward Motion
             if (Input.GetKeyDown(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, true);
             if (Input.GetKeyUp(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, false);
 
@@ -52,6 +51,7 @@ public class LocalPlayerController : MonoBehaviour
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked; 
             }
+
 
             // Left/right makes player model rotate around own axis
             float rotation = Input.GetAxis("Horizontal");
