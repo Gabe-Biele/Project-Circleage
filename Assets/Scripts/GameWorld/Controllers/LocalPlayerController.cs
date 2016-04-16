@@ -58,7 +58,7 @@ public class LocalPlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.W))
         {
             CameraController cameraControllerObj = (CameraController)Camera.main.GetComponent("CameraController");
-            this.PlayerRB.transform.Rotate(0, Camera.main.transform.localRotation.eulerAngles.y - 5, 0);
+            this.PlayerRB.transform.Rotate(0, Camera.main.transform.localRotation.eulerAngles.y, 0);
             cameraControllerObj.ResetCamera();
             this.PlayerRB.MovePosition(transform.position + (transform.forward * Time.deltaTime * PlayerSpeed));
         }

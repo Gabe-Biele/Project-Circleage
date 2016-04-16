@@ -67,7 +67,7 @@ public class GameWorldManager : MonoBehaviour
             ObjectIn.PutBool("IsMoving", false);
             SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
         }
-        if(Input.GetMouseButton(1) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.W) && Input.GetAxis("Mouse X") != 0)
         {
             ISFSObject ObjectIn = new SFSObject();
             ObjectIn.PutFloat("Rotation", ourLPC.GetRotation());
@@ -137,9 +137,8 @@ public class GameWorldManager : MonoBehaviour
         Camera.main.transform.parent = LocalPlayer.transform;
         GameObject cameraAttach = new GameObject();
         cameraAttach.transform.parent = LocalPlayer.transform;
-        cameraAttach.transform.localPosition = new Vector3(0, 2.5f, 0);
-        Camera.main.GetComponent<CameraController>().target = cameraAttach;
-        Camera.main.transform.localPosition = new Vector3(0, 5, -12);
+        cameraAttach.transform.localPosition = new Vector3(1f, 2.5f, 1.0f);
+        Camera.main.GetComponent<CameraController>().setTarget(cameraAttach);
     }
     public void spawnNPC(String aNPCName, float[] location)
     {
