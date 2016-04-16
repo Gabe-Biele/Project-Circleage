@@ -20,6 +20,7 @@ public class GameWorldManager : MonoBehaviour
 
     private Dictionary<string, GameObject> ourPlayerDictionary = new Dictionary<string, GameObject>();
     private Dictionary<string, ServerResponseHandler> ourSRHDictionary = new Dictionary<string, ServerResponseHandler>();
+    //private Dictionary<string, GameObject> ourNPCDictionary
 
     // Use this for initialization
     void Start ()
@@ -41,6 +42,7 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("DespawnPlayer", new DespawnPlayerHandler());
         ourSRHDictionary.Add("PositionUpdate", new PositionUpdateHandler());
         ourSRHDictionary.Add("RotationUpdate", new RotationUpdateHandler());
+        ourSRHDictionary.Add("SpawnNPC", new SpawnNPCHandler());
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());
@@ -133,8 +135,23 @@ public class GameWorldManager : MonoBehaviour
         ourLPC.SetName(aCharacterName);
         LocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
         Camera.main.transform.parent = LocalPlayer.transform;
-        Camera.main.GetComponent<CameraController>().target = LocalPlayer;
-        Camera.main.transform.localPosition = new Vector3(0, 6, -12);
+        GameObject cameraAttach = new GameObject();
+        cameraAttach.transform.parent = LocalPlayer.transform;
+        cameraAttach.transform.localPosition = new Vector3(0, 2.5f, 0);
+        Camera.main.GetComponent<CameraController>().target = cameraAttach;
+        Camera.main.transform.localPosition = new Vector3(0, 5, -12);
+    }
+    public void spawnNPC(String aNPCName, float[] location)
+    {
+        //Instantiate RemotePlayerObject
+        GameObject aNPC = (GameObject)Instantiate(Resources.Load("Prefabs/NPC/" + aNPCName, typeof(GameObject)));
+        aNPC.name = "NPC_" + aNPCName;
+        aNPC.AddComponent<RemotePlayerController>();
+        aNPC.transform.position = new Vector3(location[0], location[1], location[2]);
+        aNPC.GetComponentInChildren<TextMesh>().text = aNPCName;
+
+        //Add Newly spawned player to Dictionary
+        //ourNPCDictionary.Add(aNPCName, aNPC);
     }
     public LocalPlayerController getLPC()
     {
