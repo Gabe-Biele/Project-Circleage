@@ -113,6 +113,7 @@
     <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\Editor\SearchableWindow.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\AssetStoreTools\AdventureForge\Read me.txt" />
     <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />

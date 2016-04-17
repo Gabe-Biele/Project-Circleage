@@ -20,7 +20,8 @@ public class GameWorldManager : MonoBehaviour
 
     private Dictionary<string, GameObject> ourPlayerDictionary = new Dictionary<string, GameObject>();
     private Dictionary<string, ServerResponseHandler> ourSRHDictionary = new Dictionary<string, ServerResponseHandler>();
-    //private Dictionary<string, GameObject> ourNPCDictionary
+    private Dictionary<int, GameObject> ourNPCDictionary = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> ourResourceDictionary = new Dictionary<int, GameObject>();
 
     // Use this for initialization
     void Start ()
@@ -43,6 +44,8 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("PositionUpdate", new PositionUpdateHandler());
         ourSRHDictionary.Add("RotationUpdate", new RotationUpdateHandler());
         ourSRHDictionary.Add("SpawnNPC", new SpawnNPCHandler());
+        ourSRHDictionary.Add("SpawnResource", new SpawnResourceHandler());
+        ourSRHDictionary.Add("ProcessChat", new ProcessChatHandler());
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());
@@ -87,7 +90,7 @@ public class GameWorldManager : MonoBehaviour
         try
         {
             String ResponseType = (string)evt.Params["cmd"];
-            Debug.Log("Received Response: " + ResponseType);
+            //Debug.Log("Received Response: " + ResponseType);
             ISFSObject anObjectIn = (SFSObject)evt.Params["params"];
 
             ourSRHDictionary[ResponseType].HandleResponse(anObjectIn, this);
@@ -139,18 +142,30 @@ public class GameWorldManager : MonoBehaviour
         cameraAttach.transform.parent = LocalPlayer.transform;
         cameraAttach.transform.localPosition = new Vector3(1f, 2.5f, 1.0f);
         Camera.main.GetComponent<CameraController>().setTarget(cameraAttach);
+        Camera.main.GetComponent<CameraController>().setCombatMode(false); //False will turn ON combat mode
     }
-    public void spawnNPC(String aNPCName, float[] location)
+    public void spawnNPC(int ID, String aNPCName, float[] location)
     {
         //Instantiate RemotePlayerObject
         GameObject aNPC = (GameObject)Instantiate(Resources.Load("Prefabs/NPC/" + aNPCName, typeof(GameObject)));
-        aNPC.name = "NPC_" + aNPCName;
+        aNPC.name = "NPC_" + aNPCName + "_" + ID;
         aNPC.AddComponent<RemotePlayerController>();
         aNPC.transform.position = new Vector3(location[0], location[1], location[2]);
         aNPC.GetComponentInChildren<TextMesh>().text = aNPCName;
 
         //Add Newly spawned player to Dictionary
-        //ourNPCDictionary.Add(aNPCName, aNPC);
+        ourNPCDictionary.Add(ID, aNPC);
+    }
+    public void spawnResource(int ID, String aResourceName, float[] location)
+    {
+        //Instantiate RemotePlayerObject
+        GameObject aResource = (GameObject)Instantiate(Resources.Load("Prefabs/Resources/" + aResourceName, typeof(GameObject)));
+        aResource.name = "Resource_" + aResourceName + "_" + ID;
+        aResource.AddComponent<RemotePlayerController>();
+        aResource.transform.position = new Vector3(location[0], location[1], location[2]);
+
+        //Add Newly spawned player to Dictionary
+        ourResourceDictionary.Add(ID, aResource);
     }
     public LocalPlayerController getLPC()
     {

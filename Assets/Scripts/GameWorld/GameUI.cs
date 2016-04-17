@@ -20,48 +20,20 @@ public class GameUI : MonoBehaviour
     private GameObject ChatContent;
     private List<GameObject> ChatTextLabel;
 
+    private GameObject rayCastLabel;
+
+
     // Use this for initialization
     void Start ()
     {
-        if(SmartFoxConnection.Connection == null)
-        {
-            SceneManager.LoadScene("Login");
-            return;
-        }
         SFServer = SmartFoxConnection.Connection;
-        SmartFoxConnection.NeedsDespawn = true;
 
         ChatTB = GameObject.Find("ChatTB").GetComponent<InputField>();
         ChatContent = GameObject.Find("ChatContent");
         ChatTextLabel = new List<GameObject>();
 
-        SFServer.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtensionResponse);
-    }
-
-    private void OnExtensionResponse(BaseEvent evt)
-    {
-        try
-        {
-            String ResponseType = (string)evt.Params["cmd"];
-            Debug.Log("Received Response: " + ResponseType);
-            ISFSObject ObjectIn = (SFSObject)evt.Params["params"];
-            if(ResponseType == "ProcessChat")
-            {
-                //Debug.Log(ObjectIn.GetUtfString("ChatText"));
-                ChatTextLabel.Add((GameObject)Instantiate(Resources.Load("UI/ChatText", typeof(GameObject))));
-                ChatTextLabel[ChatTextLabel.Count - 1].name = "ChatText[" + (ChatTextLabel.Count - 1) + "]";
-                ChatTextLabel[ChatTextLabel.Count-1].GetComponent<RectTransform>().SetParent(this.ChatContent.GetComponent<RectTransform>());
-                ChatTextLabel[ChatTextLabel.Count-1].GetComponent<Text>().text = ObjectIn.GetUtfString("ChatText");
-                for(int i = 0; i < ChatTextLabel.Count; i++)
-                {
-                    ChatTextLabel[i].GetComponent<RectTransform>().localPosition = new Vector3(205, ChatTextLabel[i].GetComponent<RectTransform>().localPosition.y + 18);
-                }
-            }
-        }
-        catch(Exception e)
-        {
-            Debug.Log("Exception handling response: " + e.Message + " >>> " + e.StackTrace);
-        }
+        rayCastLabel = GameObject.Find("RayCastLabel");
+        rayCastLabel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -88,7 +60,6 @@ public class GameUI : MonoBehaviour
             SFServer.ProcessEvents();
         }
     }
-
     public void EnterButton_Clicked()
     {
         this.ChatText = this.ChatTB.text;
@@ -101,5 +72,29 @@ public class GameUI : MonoBehaviour
     public void QuitButton_Clicked()
     {
         Application.Quit();
+    }
+
+    public void processChat(String chatText)
+    {
+        ChatTextLabel.Add((GameObject)Instantiate(Resources.Load("UI/ChatText", typeof(GameObject))));
+        ChatTextLabel[ChatTextLabel.Count - 1].name = "ChatText[" + (ChatTextLabel.Count - 1) + "]";
+        ChatTextLabel[ChatTextLabel.Count - 1].GetComponent<RectTransform>().SetParent(this.ChatContent.GetComponent<RectTransform>());
+        ChatTextLabel[ChatTextLabel.Count - 1].GetComponent<Text>().text = chatText;
+        for(int i = 0; i < ChatTextLabel.Count; i++)
+        {
+            ChatTextLabel[i].GetComponent<RectTransform>().localPosition = new Vector3(205, ChatTextLabel[i].GetComponent<RectTransform>().localPosition.y + 18);
+        }
+    }
+    public void activateRayCastLabel(GameObject aGameObject)
+    {
+        if(aGameObject.tag == "Resource")
+        {
+            rayCastLabel.SetActive(true);
+            rayCastLabel.GetComponent<Text>().text = aGameObject.name.Split('_')[1] + "\nPress F to Gather";
+        }
+    }
+    public void deactivateRayCastLabel()
+    {
+        rayCastLabel.SetActive(false);
     }
 }

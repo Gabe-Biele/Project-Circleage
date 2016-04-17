@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
     public Transform cameraTarget;
     public Vector3 cameraPosition;
 
-    public bool InCombat = true;
+    public bool InCombat;
 
     public float deltaX;
-    public float sensitivityX = 5.0f;
+    public float sensitivityX = 8.0f;
     public float deltaY;
     public float sensitivityY = 3.0f;
 
@@ -17,10 +18,17 @@ public class CameraController : MonoBehaviour
     void Start ()
     {
         cameraPosition = new Vector3(0, 4, -8);
-	}
-	
+
+        InCombat = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
     void LateUpdate()
     {
+        if(Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            setCombatMode(InCombat);
+        }
         if(cameraTarget != null)
         {
             if(InCombat)
@@ -46,5 +54,20 @@ public class CameraController : MonoBehaviour
     public void setTarget(GameObject cameraPoint)
     {
         cameraTarget = cameraPoint.transform;
+    }
+    public void setCombatMode(bool cm)
+    {
+        if(cm)
+        {
+            InCombat = false;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if(!cm)
+        {
+            InCombat = true;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }
