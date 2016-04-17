@@ -6,12 +6,12 @@ using Sfs2X.Entities.Data;
 
 namespace Assets.Scripts.GameWorld.ServerResponseHandlers
 {
-    class SpawnNPCHandler : ServerResponseHandler
+    class SpawnResourceHandler : ServerResponseHandler
     {
 
         public void HandleResponse(ISFSObject anObjectIn, GameWorldManager ourGWM)
         {
-            ourGWM.spawnNPC(anObjectIn.GetInt("ID"), anObjectIn.GetUtfString("Name"), anObjectIn.GetFloatArray("Location"));
+            ourGWM.spawnResource(anObjectIn.GetInt("ID"), anObjectIn.GetUtfString("Name"), anObjectIn.GetFloatArray("Location"));
         }
     }
 }

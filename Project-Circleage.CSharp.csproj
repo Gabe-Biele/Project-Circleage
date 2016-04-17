@@ -120,23 +120,27 @@
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\WaypointProgressTracker.cs" />
-    <Compile Include="Assets\Scripts\GameWorld\Controllers\LocalPlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\CameraController.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\Controllers\LocalPlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\RemotePlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameUI.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameWorldManager.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\RayCastManager.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\DespawnPlayerHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\PositionUpdateHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\RotationUpdateHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ServerResponseHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnNPCHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ProcessChatHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnPlayerHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnResourceHandler.cs" />
     <Compile Include="Assets\Scripts\Startup\CharacterCreation.cs" />
     <Compile Include="Assets\Scripts\Startup\CharacterSelection.cs" />
     <Compile Include="Assets\Scripts\Startup\LoginConnector.cs" />
     <Compile Include="Assets\Scripts\Util\SmartFoxConnection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\AssetStoreTools\AdventureForge\Read me.txt" />
     <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
