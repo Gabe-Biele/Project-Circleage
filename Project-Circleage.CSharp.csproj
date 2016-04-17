@@ -120,8 +120,8 @@
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\WaypointProgressTracker.cs" />
-    <Compile Include="Assets\Scripts\GameWorld\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\LocalPlayerController.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\RemotePlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameUI.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameWorldManager.cs" />
