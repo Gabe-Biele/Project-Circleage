@@ -6,7 +6,9 @@
 [Ll]ibrary/
 [Oo]bj/
 [Tt]emp/
-sysinfo.txt # crash report file
+
+# crash report file
+sysinfo.txt
 *.stackdump
 
 
@@ -24,6 +26,8 @@ sysinfo.txt # crash report file
 *.tmp
 *.user
 *.userprefs
+
+Assembly*.csproj
 
 # ============================ #
 # Unity3D generated meta files #
