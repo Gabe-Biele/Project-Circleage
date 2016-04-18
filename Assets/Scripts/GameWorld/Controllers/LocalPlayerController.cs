@@ -12,6 +12,7 @@ public class LocalPlayerController : MonoBehaviour
     private float PlayerSpeed = 10;
     private float RotationSpeed = 40;
     private Rigidbody PlayerRB;
+    GameUI theUI;
 
     private Animator MecAnim;
     private static int RUN_ANIMATION = Animator.StringToHash("IsRunning");
@@ -22,16 +23,20 @@ public class LocalPlayerController : MonoBehaviour
 
         this.PlayerRB = this.GetComponent<Rigidbody>();
         this.MecAnim = this.GetComponentInChildren<Animator>();
+        theUI = (GameUI)FindObjectOfType(typeof(GameUI));
+
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, true);
         if(Input.GetKeyUp(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, false);
-
-        if(Input.GetKey(KeyCode.W))
+        
+        if(Input.GetKey(KeyCode.W)&&!theUI.GetchatTBFocus())
         {
+            Debug.Log(theUI.GetchatTBFocus());
             CameraController cameraControllerObj = (CameraController)Camera.main.GetComponent("CameraController");
+            cameraControllerObj.setCursorVisible(false);
             this.PlayerRB.transform.Rotate(0, Camera.main.transform.localRotation.eulerAngles.y, 0);
             cameraControllerObj.ResetCamera();
             this.PlayerRB.MovePosition(transform.position + (transform.forward * Time.deltaTime * PlayerSpeed));

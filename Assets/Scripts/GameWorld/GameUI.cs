@@ -34,17 +34,23 @@ public class GameUI : MonoBehaviour
 
         rayCastLabel = GameObject.Find("RayCastLabel");
         rayCastLabel.SetActive(false);
+        ChatTBisFocused = false;
     }
 
     // Update is called once per frame
     void Update ()
     {
+        if(this.ChatTB.isFocused)
+        {
+            ChatTBisFocused = true;
+        }
         if(Input.GetKeyDown(KeyCode.Return))
         {
             Debug.Log(this.ChatTB.isFocused);
             if(this.ChatTBisFocused)
             {
-                this.EnterButton_Clicked();
+                this.SendMessage();
+                this.ChatTBisFocused = false;
             }
             else
             {
@@ -60,7 +66,7 @@ public class GameUI : MonoBehaviour
             SFServer.ProcessEvents();
         }
     }
-    public void EnterButton_Clicked()
+    public void SendMessage()
     {
         this.ChatText = this.ChatTB.text;
         this.ChatTB.text = "";
@@ -96,5 +102,10 @@ public class GameUI : MonoBehaviour
     public void deactivateRayCastLabel()
     {
         rayCastLabel.SetActive(false);
+    }
+
+    public bool GetchatTBFocus()
+    {
+        return ChatTB.isFocused;
     }
 }

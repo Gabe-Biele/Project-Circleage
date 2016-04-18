@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     public Transform cameraTarget;
     public Vector3 cameraPosition;
 
-    public bool InCombat;
+    public bool CursorMode;
 
     public float deltaX;
     public float sensitivityX = 8.0f;
@@ -19,19 +19,19 @@ public class CameraController : MonoBehaviour
     {
         cameraPosition = new Vector3(0, 4, -8);
 
-        InCombat = false;
+        CursorMode = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
     void LateUpdate()
     {
-        if(Input.GetKeyUp(KeyCode.LeftAlt))
+        if(Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            setCombatMode(InCombat);
+            flipCursorVisible();
         }
         if(cameraTarget != null)
         {
-            if(InCombat)
+            if(!CursorMode)
             {
                 deltaX = Input.GetAxis("Mouse X");
                 cameraPosition = Quaternion.AngleAxis(deltaX * sensitivityX, Vector3.up) * cameraPosition;
@@ -55,19 +55,24 @@ public class CameraController : MonoBehaviour
     {
         cameraTarget = cameraPoint.transform;
     }
-    public void setCombatMode(bool cm)
+    public void setCursorVisible(bool cm)
     {
         if(cm)
         {
-            InCombat = false;
+            CursorMode = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
         else if(!cm)
         {
-            InCombat = true;
+            CursorMode = false;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    public void flipCursorVisible()
+    {
+        setCursorVisible(!CursorMode);
     }
 }

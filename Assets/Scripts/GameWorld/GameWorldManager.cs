@@ -142,7 +142,7 @@ public class GameWorldManager : MonoBehaviour
         cameraAttach.transform.parent = LocalPlayer.transform;
         cameraAttach.transform.localPosition = new Vector3(1f, 2.5f, 1.0f);
         Camera.main.GetComponent<CameraController>().setTarget(cameraAttach);
-        Camera.main.GetComponent<CameraController>().setCombatMode(false); //False will turn ON combat mode
+        Camera.main.GetComponent<CameraController>().setCursorVisible(false); 
     }
     public void spawnNPC(int ID, String aNPCName, float[] location)
     {
