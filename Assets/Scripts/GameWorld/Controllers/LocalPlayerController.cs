@@ -37,7 +37,7 @@ public class LocalPlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, true);
             if (Input.GetKeyUp(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, false);
 
-            if (Input.GetKey(KeyCode.W) && !theUI.GetchatTBFocus())
+            if (Input.GetKey(KeyCode.W))
             {
                 CameraController cameraControllerObj = (CameraController)Camera.main.GetComponent("CameraController");
                 cameraControllerObj.setCursorVisible(false);

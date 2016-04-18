@@ -83,7 +83,7 @@ public class GameWorldManager : MonoBehaviour
             {
                 ourLPC.getPlayerAction().PerformAction(GameObject.Find("SceneScriptsObject"));
             }
-    }
+        }
     }
     void FixedUpdate()
     {
