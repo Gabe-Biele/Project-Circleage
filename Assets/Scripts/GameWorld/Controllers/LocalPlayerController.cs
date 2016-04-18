@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Sfs2X;
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
+using Assets.Scripts.GameWorld.PlayerActions;
 
 public class LocalPlayerController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class LocalPlayerController : MonoBehaviour
 
     private Animator MecAnim;
     private static int RUN_ANIMATION = Animator.StringToHash("IsRunning");
+
+    private PlayerAction currentPlayerAction;
 
     void Start()
     {
@@ -68,5 +71,13 @@ public class LocalPlayerController : MonoBehaviour
     public void SetName(string aPN)
     {
         this.PlayerName = aPN;
+    }
+    public void setPlayerAction(PlayerAction aPA)
+    {
+        currentPlayerAction = aPA;
+    }
+    public PlayerAction getPlayerAction()
+    {
+        return currentPlayerAction;
     }
 }

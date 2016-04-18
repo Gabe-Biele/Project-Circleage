@@ -45,11 +45,14 @@ public class GameUI : MonoBehaviour
             if(this.ChatTBisFocused)
             {
                 this.EnterButton_Clicked();
+                this.ChatTBisFocused = false;
+                Camera.main.GetComponent<CameraController>().setCombatMode(false);
             }
             else
             {
                 this.ChatTB.Select();
                 this.ChatTBisFocused = true;
+                Camera.main.GetComponent<CameraController>().setCombatMode(true);
             }
         }
     }
