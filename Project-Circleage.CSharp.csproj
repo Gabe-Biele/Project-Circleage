@@ -58,6 +58,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -123,8 +129,11 @@
     <Compile Include="Assets\Scripts\GameWorld\Controllers\RemotePlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameUI.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameWorldManager.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\PlayerActions\GatherResourceAction.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\PlayerActions\PlayerAction.cs" />
     <Compile Include="Assets\Scripts\GameWorld\RayCastManager.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\DespawnPlayerHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\GatherResourceHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\PositionUpdateHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ProcessChatHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\RotationUpdateHandler.cs" />
