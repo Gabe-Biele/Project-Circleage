@@ -29,24 +29,26 @@ public class LocalPlayerController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, true);
-        if(Input.GetKeyUp(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, false);
-        
-        if(Input.GetKey(KeyCode.W)&&!theUI.GetchatTBFocus())
+        if (!theUI.GetchatTBFocus())
         {
-            Debug.Log(theUI.GetchatTBFocus());
-            CameraController cameraControllerObj = (CameraController)Camera.main.GetComponent("CameraController");
-            cameraControllerObj.setCursorVisible(false);
-            this.PlayerRB.transform.Rotate(0, Camera.main.transform.localRotation.eulerAngles.y, 0);
-            cameraControllerObj.ResetCamera();
-            this.PlayerRB.MovePosition(transform.position + (transform.forward * Time.deltaTime * PlayerSpeed));
-        }
+            if (Input.GetKeyDown(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, true);
+            if (Input.GetKeyUp(KeyCode.W)) this.MecAnim.SetBool(RUN_ANIMATION, false);
 
-        // Left/right makes player model rotate around own axis
-        float rotation = Input.GetAxis("Horizontal");
-        if(rotation != 0)
-        {
-            this.transform.Rotate(Vector3.up, rotation * Time.deltaTime * RotationSpeed);
+            if (Input.GetKey(KeyCode.W) && !theUI.GetchatTBFocus())
+            {
+                CameraController cameraControllerObj = (CameraController)Camera.main.GetComponent("CameraController");
+                cameraControllerObj.setCursorVisible(false);
+                this.PlayerRB.transform.Rotate(0, Camera.main.transform.localRotation.eulerAngles.y, 0);
+                cameraControllerObj.ResetCamera();
+                this.PlayerRB.MovePosition(transform.position + (transform.forward * Time.deltaTime * PlayerSpeed));
+            }
+
+            // Left/right makes player model rotate around own axis
+            float rotation = Input.GetAxis("Horizontal");
+            if (rotation != 0)
+            {
+                this.transform.Rotate(Vector3.up, rotation * Time.deltaTime * RotationSpeed);
+            }
         }
     }
     void FixedUpdate()

@@ -46,7 +46,6 @@ public class GameUI : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            Debug.Log(this.ChatTB.isFocused);
             if(this.ChatTBisFocused)
             {
                 this.SendMessage();
