@@ -46,6 +46,7 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("SpawnNPC", new SpawnNPCHandler());
         ourSRHDictionary.Add("SpawnResource", new SpawnResourceHandler());
         ourSRHDictionary.Add("ProcessChat", new ProcessChatHandler());
+        ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());
@@ -76,6 +77,13 @@ public class GameWorldManager : MonoBehaviour
             ObjectIn.PutFloat("Rotation", ourLPC.GetRotation());
             SFServer.Send(new ExtensionRequest("RotationUpdate", ObjectIn));
         }
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if(ourLPC.getPlayerAction() != null)
+            {
+                ourLPC.getPlayerAction().PerformAction(GameObject.Find("SceneScriptsObject"));
+            }
+    }
     }
     void FixedUpdate()
     {
@@ -167,6 +175,11 @@ public class GameWorldManager : MonoBehaviour
         //Add Newly spawned player to Dictionary
         ourResourceDictionary.Add(ID, aResource);
     }
+    public void despawnResource(int aResourceID)
+    {
+        Destroy(ourResourceDictionary[aResourceID]);
+        ourResourceDictionary.Remove(aResourceID);
+    }
     public LocalPlayerController getLPC()
     {
         return this.ourLPC;
@@ -174,5 +187,9 @@ public class GameWorldManager : MonoBehaviour
     public Dictionary<string, GameObject> getPlayerDictionary()
     {
         return this.ourPlayerDictionary;
+    }
+    public Dictionary<int, GameObject> getResourceDictionary()
+    {
+        return this.ourResourceDictionary;
     }
 }

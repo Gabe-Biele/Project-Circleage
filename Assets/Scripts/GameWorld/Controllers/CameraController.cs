@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     public bool CursorMode;
 
     public float deltaX;
-    public float sensitivityX = 8.0f;
+    public float sensitivityX = 6.0f;
     public float deltaY;
     public float sensitivityY = 3.0f;
 
