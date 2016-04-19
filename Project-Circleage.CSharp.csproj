@@ -147,10 +147,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AssetStoreTools\AdventureForge\Read me.txt" />
-    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard&apos;s\Wizard_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard&apos;s\Wizard_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Readme.txt" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_Standard.shader" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_UnityStandardCore.cginc" />
