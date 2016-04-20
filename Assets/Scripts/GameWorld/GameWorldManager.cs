@@ -57,39 +57,8 @@ public class GameWorldManager : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        //Can this stuff be moved to localplayercontroller?
-        //Think it makes sense as you're controlling the local player
-        //Also makes it easier since the functionality to not move when in chat is in there
-        //This not being there means the person is still moving server side when chat is enabled
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloatArray("Location", ourLPC.GetLocation());
-            ObjectIn.PutBool("IsMoving", true);
-            SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
-        }
-        if(Input.GetKeyUp(KeyCode.W))
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloatArray("Location", ourLPC.GetLocation());
-            ObjectIn.PutBool("IsMoving", false);
-            SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
-        }
-        if(Input.GetKey(KeyCode.W) && Input.GetAxis("Mouse X") != 0)
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloat("Rotation", ourLPC.GetRotation());
-            SFServer.Send(new ExtensionRequest("RotationUpdate", ObjectIn));
-        }
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            if(ourLPC.getPlayerAction() != null)
-            {
-                ourLPC.getPlayerAction().PerformAction(GameObject.Find("SceneScriptsObject"));
-            }
-        }
         TextMesh[] textObjects = FindObjectsOfType<TextMesh>();
-
+        
         //Is there a better way to do this?
         //This goes through every textobject to make sure its pointed at the camera
         foreach (TextMesh textObject in textObjects)
@@ -162,6 +131,7 @@ public class GameWorldManager : MonoBehaviour
         ourIC.ourSSO = GameObject.Find("SceneScriptsObject");
         ourIC.ourRCM = ourIC.ourSSO.GetComponent<RayCastManager>();
         ourIC.theUI = ourIC.ourSSO.GetComponent<GameUI>();
+        ourIC.ourLPC = ourLPC;
         ourIC.update = true;
         LocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
         Camera.main.transform.parent = LocalPlayer.transform;

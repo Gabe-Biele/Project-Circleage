@@ -4,6 +4,8 @@ using System.Collections;
 public class NPCController : MonoBehaviour {
 
 
+    private int ID;
+
     private float maxHealth;
     private float currentHealth;
 
@@ -38,7 +40,11 @@ public class NPCController : MonoBehaviour {
     }
     public string healthString()
     {
-        Debug.Log(maxHealth);
         return currentHealth.ToString() + "/" + maxHealth.ToString();
+    }
+
+    public int getID()
+    {
+        return ID;
     }
 }

@@ -36,7 +36,6 @@ public class RayCastManager : MonoBehaviour
             {
                 setCurrentRayCastObject(hit.collider.gameObject);
                 onNPC = true;
-                Debug.Log("Hit an npc!");
             }
             //If this is just an else, the text flashes.
             if(hit.collider.gameObject.tag != "Resource" && hit.collider.gameObject.tag != "NPC")
