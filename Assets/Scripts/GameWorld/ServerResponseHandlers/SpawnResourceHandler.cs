@@ -18,6 +18,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
 
             GameObject aResource = ourGWM.createObject("Prefabs/Resources/" + aResourceName);
             aResource.name = "Resource_" + aResourceName + "_" + ID;
+            aResource.AddComponent<RemotePlayerController>();
             aResource.transform.position = new Vector3(location[0], location[1], location[2]);
 
             //Add Newly spawned player to Dictionary
