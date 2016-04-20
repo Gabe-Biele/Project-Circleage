@@ -14,6 +14,8 @@ public class LocalPlayerController : MonoBehaviour
     private float RotationSpeed = 40;
     private Rigidbody PlayerRB;
     GameUI theUI;
+    GameObject ourSSO;
+    RayCastManager ourRCM;
 
     private Animator MecAnim;
     private static int RUN_ANIMATION = Animator.StringToHash("IsRunning");
@@ -27,6 +29,7 @@ public class LocalPlayerController : MonoBehaviour
         this.PlayerRB = this.GetComponent<Rigidbody>();
         this.MecAnim = this.GetComponentInChildren<Animator>();
         theUI = (GameUI)FindObjectOfType(typeof(GameUI));
+
 
     }
 
@@ -51,6 +54,17 @@ public class LocalPlayerController : MonoBehaviour
             if (rotation != 0)
             {
                 this.transform.Rotate(Vector3.up, rotation * Time.deltaTime * RotationSpeed);
+            }
+            //TODO fill in stuff here
+            ourSSO = GameObject.Find("SceneScriptsObject");
+            RayCastManager ourRCM = ourSSO.GetComponent<RayCastManager>();
+            if (Input.GetMouseButtonDown(0) && ourRCM.onNPC)
+            {
+                if (ourRCM.currentRayCastObject.tag == "NPC")
+                {
+                    ourRCM.currentRayCastObject.transform.parent.GetComponent<NPCController>().takeDamage(1);
+                    theUI.activateRayCastLabel(ourRCM.currentRayCastObject);
+                }
             }
         }
     }

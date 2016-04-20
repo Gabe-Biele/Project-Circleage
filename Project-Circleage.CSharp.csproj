@@ -125,6 +125,7 @@
     <Compile Include="Assets\AssetStoreTools\TerrainComposer\Scripts\rtp_functions.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\LocalPlayerController.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\Controllers\NPCController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\RemotePlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameUI.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameWorldManager.cs" />

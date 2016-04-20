@@ -7,12 +7,14 @@ public class RayCastManager : MonoBehaviour
     public GameUI ourGameUI;
     public GameWorldManager ourGWM;
     public GameObject currentRayCastObject;
+    public bool onNPC;
 
     // Use this for initialization
     void Start ()
     {
         ourGameUI = GameObject.Find("SceneScriptsObject").GetComponent<GameUI>();
         ourGWM = GameObject.Find("SceneScriptsObject").GetComponent<GameWorldManager>();
+        onNPC = false;
     }
 	
 	// Update is called once per frame
@@ -30,11 +32,19 @@ public class RayCastManager : MonoBehaviour
                 setCurrentRayCastObject(hit.collider.gameObject);
                 ourGWM.getLPC().setPlayerAction(new GatherResourceAction());
             }
-            if(hit.collider.gameObject.tag != "Resource")
+            else if(hit.collider.gameObject.tag == "NPC" && currentRayCastObject != hit.collider.gameObject && Vector3.Distance(hit.collider.transform.position, ourGWM.getLPC().GetComponentInParent<Transform>().position) < 40)
+            {
+                setCurrentRayCastObject(hit.collider.gameObject);
+                onNPC = true;
+                Debug.Log("Hit an npc!");
+            }
+            //If this is just an else, the text flashes.
+            if(hit.collider.gameObject.tag != "Resource" && hit.collider.gameObject.tag != "NPC")
             {
                 ourGameUI.deactivateRayCastLabel();
                 currentRayCastObject = null;
                 ourGWM.getLPC().setPlayerAction(null);
+                onNPC = false;
             }
         }
     }

@@ -57,6 +57,10 @@ public class GameWorldManager : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        //Can this stuff be moved to localplayercontroller?
+        //Think it makes sense as you're controlling the local player
+        //Also makes it easier since the functionality to not move when in chat is in there
+        //This not being there means the person is still moving server side when chat is enabled
         if(Input.GetKeyDown(KeyCode.W))
         {
             ISFSObject ObjectIn = new SFSObject();
@@ -87,6 +91,7 @@ public class GameWorldManager : MonoBehaviour
         TextMesh[] textObjects = FindObjectsOfType<TextMesh>();
 
         //Is there a better way to do this?
+        //This goes through every textobject to make sure its pointed at the camera
         foreach (TextMesh textObject in textObjects)
         {
             textObject.transform.LookAt(Camera.main.transform);
@@ -142,7 +147,7 @@ public class GameWorldManager : MonoBehaviour
     }
     public void spawnLocalPlayer(String aCharacterName, float[] Loc)
     {
-        Debug.Log(Loc[0] + "      " + Loc[1] + "      " + Loc[2]);
+        //Debug.Log(Loc[0] + "      " + Loc[1] + "      " + Loc[2]);
         // Lets spawn our local player model
         LocalPlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerBasic", typeof(GameObject)));
         LocalPlayer.transform.position = new Vector3(Loc[0], Loc[1], Loc[2]);
@@ -158,14 +163,17 @@ public class GameWorldManager : MonoBehaviour
         cameraAttach.transform.parent = LocalPlayer.transform;
         cameraAttach.transform.localPosition = new Vector3(1f, 2.5f, 1.0f);
         Camera.main.GetComponent<CameraController>().setTarget(cameraAttach);
-        Camera.main.GetComponent<CameraController>().setCursorVisible(false); 
+        Camera.main.GetComponent<CameraController>().setCursorVisible(false);
+
+      
+
     }
     public void spawnNPC(int ID, String aNPCName, float[] location)
     {
         //Instantiate RemotePlayerObject
         GameObject aNPC = (GameObject)Instantiate(Resources.Load("Prefabs/NPC/" + aNPCName, typeof(GameObject)));
         aNPC.name = "NPC_" + aNPCName + "_" + ID;
-        aNPC.AddComponent<RemotePlayerController>();
+        aNPC.AddComponent<NPCController>();
         aNPC.transform.position = new Vector3(location[0], location[1], location[2]);
         aNPC.GetComponentInChildren<TextMesh>().text = aNPCName;
 

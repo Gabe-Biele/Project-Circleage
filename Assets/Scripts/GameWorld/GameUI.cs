@@ -97,6 +97,13 @@ public class GameUI : MonoBehaviour
             rayCastLabel.SetActive(true);
             rayCastLabel.GetComponent<Text>().text = aGameObject.name.Split('_')[1] + "\nPress F to Gather";
         }
+
+        if(aGameObject.tag == "NPC")
+        {
+            rayCastLabel.SetActive(true);
+            //Why does this raycast get the mesh while the resource ones get the object?
+            rayCastLabel.GetComponent<Text>().text = aGameObject.transform.parent.name.Split('_')[1] + "\nHealth: " + aGameObject.transform.parent.GetComponent<NPCController>().healthString();
+        }
     }
     public void deactivateRayCastLabel()
     {
