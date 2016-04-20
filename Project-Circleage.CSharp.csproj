@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\GameWorld\GameWorldManager.cs" />
     <Compile Include="Assets\Scripts\GameWorld\PlayerActions\GatherResourceAction.cs" />
     <Compile Include="Assets\Scripts\GameWorld\PlayerActions\PlayerAction.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\PlayerActions\TalkToNPCAction.cs" />
     <Compile Include="Assets\Scripts\GameWorld\RayCastManager.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\DespawnPlayerHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\GatherResourceHandler.cs" />

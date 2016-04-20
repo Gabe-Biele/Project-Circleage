@@ -19,12 +19,19 @@ public class LocalPlayerController : MonoBehaviour
 
     void Start()
     {
+        theUI = (GameUI)FindObjectOfType(typeof(GameUI));
         SFServer = SmartFoxConnection.Connection;
     }
 
     void Update()
     {
-        
+       if(theUI.NPCSpeechStatus())
+       { 
+            if(Vector3.Distance(transform.position, theUI.speechNPC.transform.position)>20)
+            {
+                theUI.deactivateNPCSpeech();
+            }
+        } 
     }
     void FixedUpdate()
     {

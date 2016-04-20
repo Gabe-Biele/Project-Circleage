@@ -37,8 +37,14 @@ public class RayCastManager : MonoBehaviour
                 setCurrentRayCastObject(hit.collider.gameObject);
                 onNPC = true;
             }
+            else if (hit.collider.gameObject.tag == "FriendlyNPC" && currentRayCastObject != hit.collider.gameObject && Vector3.Distance(hit.collider.transform.position, ourGWM.getLPC().GetComponentInParent<Transform>().position) < 40)
+            {
+                setCurrentRayCastObject(hit.collider.gameObject);
+                ourGWM.getLPC().setPlayerAction(new TalkToNPCAction());
+
+            }
             //If this is just an else, the text flashes.
-            if(hit.collider.gameObject.tag != "Resource" && hit.collider.gameObject.tag != "NPC")
+            if (hit.collider.gameObject.tag != "Resource" && hit.collider.gameObject.tag != "NPC" && hit.collider.gameObject.tag != "FriendlyNPC")
             {
                 ourGameUI.deactivateRayCastLabel();
                 currentRayCastObject = null;

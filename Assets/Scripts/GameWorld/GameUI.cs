@@ -16,11 +16,14 @@ public class GameUI : MonoBehaviour
     private InputField ChatTB;
     private Boolean ChatTBisFocused;
     private string ChatText;
+    public GameObject speechNPC;
 
     private GameObject ChatContent;
     private List<GameObject> ChatTextLabel;
 
     private GameObject rayCastLabel;
+
+    private GameObject npcSpeech;
 
 
     // Use this for initialization
@@ -35,6 +38,10 @@ public class GameUI : MonoBehaviour
         rayCastLabel = GameObject.Find("RayCastLabel");
         rayCastLabel.SetActive(false);
         ChatTBisFocused = false;
+
+        npcSpeech = GameObject.Find("NPCSpeech");
+        npcSpeech.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -104,11 +111,33 @@ public class GameUI : MonoBehaviour
             //Why does this raycast get the mesh while the resource ones get the object?
             rayCastLabel.GetComponent<Text>().text = aGameObject.transform.parent.name.Split('_')[1] + "\nHealth: " + aGameObject.transform.parent.GetComponent<NPCController>().healthString();
         }
+        if(aGameObject.tag == "FriendlyNPC")
+        {
+            rayCastLabel.SetActive(true);
+            rayCastLabel.GetComponent<Text>().text = aGameObject.transform.parent.name + "\n Press F to Speak";
+        }
     }
     public void deactivateRayCastLabel()
     {
         rayCastLabel.SetActive(false);
     }
+
+    public void activateNPCSpeech(String text, GameObject npc)
+    {
+        speechNPC = npc;
+        npcSpeech.GetComponent<Text>().text = text;
+        npcSpeech.SetActive(true);
+    }
+    public bool NPCSpeechStatus()
+    {
+        return npcSpeech.activeInHierarchy;
+    }
+
+    public void deactivateNPCSpeech()
+    {
+        npcSpeech.SetActive(false);
+    }
+
 
     public bool GetchatTBFocus()
     {
