@@ -14,7 +14,8 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
         {
             if(anObjectIn.GetBool("Gathered"))
             {
-                ourGWM.despawnResource(anObjectIn.GetInt("ID"));
+                ourGWM.destroyObject(ourGWM.getResourceDictionary()[anObjectIn.GetInt("ID")]);
+                ourGWM.getResourceDictionary().Remove(anObjectIn.GetInt("ID"));
             }
         }
     }
