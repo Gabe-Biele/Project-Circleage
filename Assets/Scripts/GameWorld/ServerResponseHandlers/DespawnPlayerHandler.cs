@@ -19,7 +19,8 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
             }
             else if(ourGWM.getPlayerDictionary().ContainsKey(aCharacterName))
             {
-                ourGWM.despawnRemotePlayer(aCharacterName);
+                ourGWM.destroyObject("GameCharacter_" + aCharacterName);
+                ourGWM.getPlayerDictionary().Remove(aCharacterName);
             }
         }
     }
