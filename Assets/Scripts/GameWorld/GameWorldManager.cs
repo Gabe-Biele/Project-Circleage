@@ -155,8 +155,14 @@ public class GameWorldManager : MonoBehaviour
 
         // Since this is the local player, lets add a controller and fix the camera
         LocalPlayer.AddComponent<LocalPlayerController>();
+        LocalPlayer.AddComponent<InputController>();
         ourLPC = LocalPlayer.GetComponent<LocalPlayerController>();
         ourLPC.SetName(aCharacterName);
+        InputController ourIC = LocalPlayer.GetComponent<InputController>();
+        ourIC.ourSSO = GameObject.Find("SceneScriptsObject");
+        ourIC.ourRCM = ourIC.ourSSO.GetComponent<RayCastManager>();
+        ourIC.theUI = ourIC.ourSSO.GetComponent<GameUI>();
+        ourIC.update = true;
         LocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
         Camera.main.transform.parent = LocalPlayer.transform;
         GameObject cameraAttach = new GameObject();
