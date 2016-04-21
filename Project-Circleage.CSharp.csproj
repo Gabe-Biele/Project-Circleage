@@ -136,6 +136,7 @@
     <Compile Include="Assets\Scripts\GameWorld\RayCastManager.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\DespawnPlayerHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\GatherResourceHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\NPCTextRequestHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\PositionUpdateHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ProcessChatHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\RotationUpdateHandler.cs" />

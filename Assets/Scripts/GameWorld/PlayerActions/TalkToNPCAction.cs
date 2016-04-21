@@ -24,10 +24,13 @@ namespace Assets.Scripts.GameWorld.PlayerActions
             SmartFox SFServer = SmartFoxConnection.Connection;
             SFServer.Send(new ExtensionRequest("GatherResource", aSFSObject));
             */
-            Debug.Log("This worked.");
 
-            GameUI ourUI = ourSSO.GetComponent<GameUI>();
-            ourUI.activateNPCSpeech("Get this from server later", ourRCM.currentRayCastObject);
+            ISFSObject ObjectIn = new SFSObject();
+            Debug.Log(ourRCM.currentRayCastObject.transform.parent.name.Split('_')[1]);
+            Debug.Log("Split");
+            ObjectIn.PutUtfString("NPCID", ourRCM.currentRayCastObject.transform.parent.name.Split('_')[1]);
+            SmartFox SFServer = SmartFoxConnection.Connection;
+            SFServer.Send(new ExtensionRequest("NPCTextRequest", ObjectIn));
         }
     }
 }

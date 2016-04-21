@@ -23,7 +23,7 @@ public class GameUI : MonoBehaviour
 
     private GameObject rayCastLabel;
 
-    private GameObject npcSpeech;
+    private GameObject npcSpeechPanel;
 
 
     // Use this for initialization
@@ -39,8 +39,8 @@ public class GameUI : MonoBehaviour
         rayCastLabel.SetActive(false);
         ChatTBisFocused = false;
 
-        npcSpeech = GameObject.Find("NPCSpeech");
-        npcSpeech.SetActive(false);
+        npcSpeechPanel = GameObject.Find("NPCSpeechPanel");
+        npcSpeechPanel.SetActive(false);
 
     }
 
@@ -125,17 +125,17 @@ public class GameUI : MonoBehaviour
     public void activateNPCSpeech(String text, GameObject npc)
     {
         speechNPC = npc;
-        npcSpeech.GetComponent<Text>().text = text;
-        npcSpeech.SetActive(true);
+        npcSpeechPanel.GetComponentInChildren<Text>().text = text;
+        npcSpeechPanel.SetActive(true);
     }
     public bool NPCSpeechStatus()
     {
-        return npcSpeech.activeInHierarchy;
+        return npcSpeechPanel.activeInHierarchy;
     }
 
     public void deactivateNPCSpeech()
     {
-        npcSpeech.SetActive(false);
+        npcSpeechPanel.SetActive(false);
     }
 
 

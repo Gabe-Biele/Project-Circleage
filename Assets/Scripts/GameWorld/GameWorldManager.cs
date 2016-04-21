@@ -47,6 +47,7 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("SpawnResource", new SpawnResourceHandler());
         ourSRHDictionary.Add("ProcessChat", new ProcessChatHandler());
         ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
+        ourSRHDictionary.Add("NPCTextRequest", new NPCTextRequestHandler());
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());
@@ -183,5 +184,13 @@ public class GameWorldManager : MonoBehaviour
     public Dictionary<int, GameObject> getResourceDictionary()
     {
         return this.ourResourceDictionary;
+    }
+
+    public void setNPCText(string text)
+    {
+
+        GameUI ourUI = FindObjectOfType<GameUI>();
+        RayCastManager ourRCM = FindObjectOfType<RayCastManager>();
+        ourUI.activateNPCSpeech(text, ourRCM.currentRayCastObject);
     }
 }

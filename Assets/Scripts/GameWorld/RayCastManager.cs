@@ -41,7 +41,6 @@ public class RayCastManager : MonoBehaviour
             {
                 setCurrentRayCastObject(hit.collider.gameObject);
                 ourGWM.getLPC().setPlayerAction(new TalkToNPCAction());
-
             }
             //If this is just an else, the text flashes.
             if (hit.collider.gameObject.tag != "Resource" && hit.collider.gameObject.tag != "NPC" && hit.collider.gameObject.tag != "FriendlyNPC")
