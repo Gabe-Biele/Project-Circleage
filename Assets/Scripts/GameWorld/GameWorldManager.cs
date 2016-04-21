@@ -114,79 +114,33 @@ public class GameWorldManager : MonoBehaviour
         SFServer.RemoveAllEventListeners();
         SceneManager.LoadScene("Login");
     }
-    public void spawnRemotePlayer(String aCharacterName, float[] LocationArray, float Rotation)
+    public GameObject createObject(string objectName)
     {
-        //Instantiate RemotePlayerObject
-        GameObject aRemotePlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerBasic", typeof(GameObject)));
-        aRemotePlayer.name = "GameCharacter_" + aCharacterName;
-        aRemotePlayer.AddComponent<RemotePlayerController>();
-        aRemotePlayer.transform.position = new Vector3(LocationArray[0], LocationArray[1], LocationArray[2]);
-        aRemotePlayer.GetComponent<RemotePlayerController>().SetRotation(Rotation);
-        aRemotePlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
-
-        //Add Newly spawned player to Dictionary
-        ourPlayerDictionary.Add(aCharacterName, aRemotePlayer);
+        return (GameObject)Instantiate(Resources.Load(objectName, typeof(GameObject)));
     }
-    public void despawnRemotePlayer(string aCharacterName)
+    public void destroyObject(string objectName)
     {
-        Destroy(GameObject.Find("GameCharacter_" + aCharacterName));
-        ourPlayerDictionary.Remove(aCharacterName);
+        Destroy(GameObject.Find(objectName));
     }
-    public void spawnLocalPlayer(String aCharacterName, float[] Loc)
+    public void destroyObject(GameObject o)
     {
-        Debug.Log(Loc[0] + "      " + Loc[1] + "      " + Loc[2]);
-        // Lets spawn our local player model
-        LocalPlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerBasic", typeof(GameObject)));
-        LocalPlayer.transform.position = new Vector3(Loc[0], Loc[1], Loc[2]);
-        LocalPlayer.transform.rotation = Quaternion.identity;
-
-        // Since this is the local player, lets add a controller and fix the camera
-        LocalPlayer.AddComponent<LocalPlayerController>();
-        ourLPC = LocalPlayer.GetComponent<LocalPlayerController>();
-        ourLPC.SetName(aCharacterName);
-        LocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
-        Camera.main.transform.parent = LocalPlayer.transform;
-        GameObject cameraAttach = new GameObject();
-        cameraAttach.transform.parent = LocalPlayer.transform;
-        cameraAttach.transform.localPosition = new Vector3(1f, 2.5f, 1.0f);
-        Camera.main.GetComponent<CameraController>().setTarget(cameraAttach);
-        Camera.main.GetComponent<CameraController>().setCursorVisible(false); 
-    }
-    public void spawnNPC(int ID, String aNPCName, float[] location)
-    {
-        //Instantiate RemotePlayerObject
-        GameObject aNPC = (GameObject)Instantiate(Resources.Load("Prefabs/NPC/" + aNPCName, typeof(GameObject)));
-        aNPC.name = "NPC_" + aNPCName + "_" + ID;
-        aNPC.AddComponent<RemotePlayerController>();
-        aNPC.transform.position = new Vector3(location[0], location[1], location[2]);
-        aNPC.GetComponentInChildren<TextMesh>().text = aNPCName;
-
-        //Add Newly spawned player to Dictionary
-        ourNPCDictionary.Add(ID, aNPC);
-    }
-    public void spawnResource(int ID, String aResourceName, float[] location)
-    {
-        //Instantiate RemotePlayerObject
-        GameObject aResource = (GameObject)Instantiate(Resources.Load("Prefabs/Resources/" + aResourceName, typeof(GameObject)));
-        aResource.name = "Resource_" + aResourceName + "_" + ID;
-        aResource.AddComponent<RemotePlayerController>();
-        aResource.transform.position = new Vector3(location[0], location[1], location[2]);
-
-        //Add Newly spawned player to Dictionary
-        ourResourceDictionary.Add(ID, aResource);
-    }
-    public void despawnResource(int aResourceID)
-    {
-        Destroy(ourResourceDictionary[aResourceID]);
-        ourResourceDictionary.Remove(aResourceID);
+        Destroy(o);
     }
     public LocalPlayerController getLPC()
     {
         return this.ourLPC;
     }
+    public void setLPC(LocalPlayerController aLPC)
+    {
+        this.ourLPC = aLPC;
+    }
     public Dictionary<string, GameObject> getPlayerDictionary()
     {
         return this.ourPlayerDictionary;
+    }
+    public Dictionary<int, GameObject> getNPCDictionary()
+    {
+        return this.ourNPCDictionary;
     }
     public Dictionary<int, GameObject> getResourceDictionary()
     {
