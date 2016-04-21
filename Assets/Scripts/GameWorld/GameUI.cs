@@ -90,13 +90,9 @@ public class GameUI : MonoBehaviour
             ChatTextLabel[i].GetComponent<RectTransform>().localPosition = new Vector3(205, ChatTextLabel[i].GetComponent<RectTransform>().localPosition.y + 18);
         }
     }
-    public void activateRayCastLabel(GameObject aGameObject)
+    public GameObject getRayCastLabel()
     {
-        if(aGameObject.tag == "Resource")
-        {
-            rayCastLabel.SetActive(true);
-            rayCastLabel.GetComponent<Text>().text = aGameObject.name.Split('_')[1] + "\nPress F to Gather";
-        }
+        return rayCastLabel;
     }
     public void deactivateRayCastLabel()
     {
