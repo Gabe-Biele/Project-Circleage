@@ -47,6 +47,7 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("SpawnResource", new SpawnResourceHandler());
         ourSRHDictionary.Add("ProcessChat", new ProcessChatHandler());
         ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
+        ourSRHDictionary.Add("SpawnSettlement", new SpawnSettlementHandler());
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());
@@ -81,7 +82,7 @@ public class GameWorldManager : MonoBehaviour
         {
             if(ourLPC.getPlayerAction() != null)
             {
-                ourLPC.getPlayerAction().PerformAction(GameObject.Find("SceneScriptsObject"));
+                ourLPC.getPlayerAction().performAction(GameObject.Find("SceneScriptsObject"));
             }
         }
     }

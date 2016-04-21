@@ -10,29 +10,25 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.GameWorld.PlayerActions
 {
-    class GatherResourceAction : PlayerAction
+    class CenterNodeAction : PlayerAction
     {
         public void activateRaycastLabel(GameObject anObject, GameUI ourUI)
         {
             ourUI.getRayCastLabel().SetActive(true);
-            ourUI.getRayCastLabel().GetComponent<Text>().text = anObject.name.Split('_')[1] + "\nPress F to Gather";
+
+
+            ourUI.getRayCastLabel().GetComponent<Text>().text = anObject.transform.parent.name.Split('_')[1] + "\nPress F to Contribute";
         }
 
         public void performAction(GameObject ourSSO)
         {
             RayCastManager ourRCM = ourSSO.GetComponent<RayCastManager>();
-            string astringID = ourRCM.currentRayCastObject.name.Split('_')[2];
-
-            ISFSObject aSFSObject = new SFSObject();
-            aSFSObject.PutInt("ID", Convert.ToInt32(astringID));
-
-            SmartFox SFServer = SmartFoxConnection.Connection;
-            SFServer.Send(new ExtensionRequest("GatherResource", aSFSObject));
+            string aSettlementID = ourRCM.currentRayCastObject.name.Split('_')[2];
         }
 
         public bool withinMaxDistance(float distance)
         {
-            if(distance <= 3) return true;
+            if(distance <= 8) return true;
             else return false;
         }
     }

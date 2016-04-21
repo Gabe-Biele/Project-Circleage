@@ -1,18 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scripts.GameWorld.PlayerActions;
+using System.Collections.Generic;
 
 public class RayCastManager : MonoBehaviour
 {
     public GameUI ourGameUI;
     public GameWorldManager ourGWM;
     public GameObject currentRayCastObject;
+    public Dictionary<string, PlayerAction> ourPlayerActionDictionary = new Dictionary<string, PlayerAction>();
 
     // Use this for initialization
     void Start ()
     {
         ourGameUI = GameObject.Find("SceneScriptsObject").GetComponent<GameUI>();
         ourGWM = GameObject.Find("SceneScriptsObject").GetComponent<GameWorldManager>();
+
+        ourPlayerActionDictionary.Add("Resource", new GatherResourceAction());
+        ourPlayerActionDictionary.Add("Center Node", new CenterNodeAction());
     }
 	
 	// Update is called once per frame
@@ -25,12 +30,17 @@ public class RayCastManager : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, 20))
         {
-            if(hit.collider.gameObject.tag == "Resource" && currentRayCastObject != hit.collider.gameObject && Vector3.Distance(hit.collider.transform.position, ourGWM.getLPC().GetComponentInParent<Transform>().position) < 2.5)
+            if(ourPlayerActionDictionary.ContainsKey(hit.collider.gameObject.tag) && hit.collider.gameObject != currentRayCastObject)
             {
-                setCurrentRayCastObject(hit.collider.gameObject);
-                ourGWM.getLPC().setPlayerAction(new GatherResourceAction());
+                PlayerAction anAction = ourPlayerActionDictionary[hit.collider.gameObject.tag];
+                if(anAction.withinMaxDistance(Vector3.Distance(hit.collider.transform.position, ourGWM.getLPC().GetComponentInParent<Transform>().position)))
+                {
+                    setCurrentRayCastObject(hit.collider.gameObject);
+                    anAction.activateRaycastLabel(hit.collider.gameObject, ourGameUI);
+                    ourGWM.getLPC().setPlayerAction(anAction);
+                }
             }
-            if(hit.collider.gameObject.tag != "Resource")
+            if(!ourPlayerActionDictionary.ContainsKey(hit.collider.gameObject.tag))
             {
                 ourGameUI.deactivateRayCastLabel();
                 currentRayCastObject = null;
@@ -41,6 +51,5 @@ public class RayCastManager : MonoBehaviour
     public void setCurrentRayCastObject(GameObject aGameObject)
     {
         currentRayCastObject = aGameObject;
-        ourGameUI.activateRayCastLabel(currentRayCastObject);
     }
 }
