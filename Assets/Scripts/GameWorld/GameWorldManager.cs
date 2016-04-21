@@ -48,7 +48,6 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("ProcessChat", new ProcessChatHandler());
         ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
         ourSRHDictionary.Add("SpawnSettlement", new SpawnSettlementHandler());
-        ourSRHDictionary.Add("CenterNodeInformation", new CenterNodeInformationHandler());
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());
