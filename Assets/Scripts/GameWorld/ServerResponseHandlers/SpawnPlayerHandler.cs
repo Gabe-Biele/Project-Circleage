@@ -18,7 +18,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
 
             if(anObjectIn.GetBool("IsLocal"))
             {
-                GameObject aLocalPlayer = ourGWM.createObject("Prefabs/PlayerBasic");
+                GameObject aLocalPlayer = ourGWM.createObject("Prefabs/Player/PlayerBasic");
                 aLocalPlayer.transform.position = new Vector3(locationArray[0], locationArray[1], locationArray[2]);
                 aLocalPlayer.transform.rotation = Quaternion.identity;
 
