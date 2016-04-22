@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -137,10 +139,12 @@
     <Compile Include="Assets\Scripts\GameWorld\Controllers\RemotePlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameUI.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameWorldManager.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\PlayerActions\CenterNodeAction.cs" />
     <Compile Include="Assets\Scripts\GameWorld\PlayerActions\GatherResourceAction.cs" />
     <Compile Include="Assets\Scripts\GameWorld\PlayerActions\PlayerAction.cs" />
     <Compile Include="Assets\Scripts\GameWorld\RayCastManager.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\DespawnPlayerHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\CenterNodeInformationHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\GatherResourceHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\PositionUpdateHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ProcessChatHandler.cs" />
@@ -148,6 +152,7 @@
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ServerResponseHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnNPCHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnPlayerHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnSettlementHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnResourceHandler.cs" />
     <Compile Include="Assets\Scripts\Startup\CharacterCreation.cs" />
     <Compile Include="Assets\Scripts\Startup\CharacterSelection.cs" />
@@ -159,7 +164,7 @@
     <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard&apos;s\Wizard_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard's\Wizard_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Readme.txt" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_Standard.shader" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_UnityStandardCore.cginc" />
