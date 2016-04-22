@@ -23,7 +23,13 @@ namespace Assets.Scripts.GameWorld.PlayerActions
         public void performAction(GameObject ourSSO)
         {
             RayCastManager ourRCM = ourSSO.GetComponent<RayCastManager>();
-            string aSettlementID = ourRCM.currentRayCastObject.name.Split('_')[2];
+            string aSettlementID = ourRCM.currentRayCastObject.transform.parent.name.Split('_')[2];
+
+            ISFSObject aSFSObject = new SFSObject();
+            aSFSObject.PutInt("ID", Convert.ToInt32(aSettlementID));
+
+            SmartFox SFServer = SmartFoxConnection.Connection;
+            SFServer.Send(new ExtensionRequest("CenterNodeInformation", aSFSObject));
         }
 
         public bool withinMaxDistance(float distance)
