@@ -67,8 +67,6 @@ public class GameUI : MonoBehaviour
         }
     }
 
-   #region Chat Box
-
     public void SendMessage()
     {
         this.ChatText = this.ChatTB.text;
