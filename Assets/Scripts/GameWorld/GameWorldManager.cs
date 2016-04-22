@@ -86,7 +86,15 @@ public class GameWorldManager : MonoBehaviour
                 ourLPC.getPlayerAction().performAction(GameObject.Find("SceneScriptsObject"));
             }
         }
+        TextMesh[] textObjects = FindObjectsOfType<TextMesh>();
+
+        //Is there a better way to do this?
+        foreach (TextMesh textObject in textObjects)
+        {
+            textObject.transform.LookAt(Camera.main.transform);
+            textObject.transform.Rotate(new Vector3(0, 180, 0));
         }
+    }
     void FixedUpdate()
     {
         if(SFServer != null)
