@@ -59,34 +59,7 @@ public class GameWorldManager : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloatArray("Location", ourLPC.GetLocation());
-            ObjectIn.PutBool("IsMoving", true);
-            SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
-        }
-        if(Input.GetKeyUp(KeyCode.W))
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloatArray("Location", ourLPC.GetLocation());
-            ObjectIn.PutBool("IsMoving", false);
-            SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
-        }
-        if(Input.GetKey(KeyCode.W) && Input.GetAxis("Mouse X") != 0)
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloat("Rotation", ourLPC.GetRotation());
-            SFServer.Send(new ExtensionRequest("RotationUpdate", ObjectIn));
-        }
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            if(ourLPC.getPlayerAction() != null)
-            {
-                ourLPC.getPlayerAction().performAction(GameObject.Find("SceneScriptsObject"));
-            }
-        }
-        }
+    }
     void FixedUpdate()
     {
         if(SFServer != null)

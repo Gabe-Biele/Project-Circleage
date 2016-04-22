@@ -57,6 +57,11 @@ public class GameUI : MonoBehaviour
                 this.ChatTBisFocused = true;
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            OpenInventory();
+        }
     }
 
     void FixedUpdate()
@@ -78,6 +83,8 @@ public class GameUI : MonoBehaviour
         ObjectIn.PutUtfString("ChatText", this.ChatText);
         SFServer.Send(new ExtensionRequest("ProcessChat", ObjectIn));
     }
+
+    #endregion Chat Box
     public void QuitButton_Clicked()
     {
         Application.Quit();
@@ -110,5 +117,10 @@ public class GameUI : MonoBehaviour
     public bool GetchatTBFocus()
     {
         return ChatTB.isFocused;
+    }
+
+    public void OpenInventory()
+    {
+
     }
 }
