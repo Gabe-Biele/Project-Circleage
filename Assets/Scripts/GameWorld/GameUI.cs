@@ -78,6 +78,10 @@ public class GameUI : MonoBehaviour
     {
         Application.Quit();
     }
+    public void contributionExitButton_Clicked()
+    {
+        Destroy(GameObject.Find("ContributionPanel"));
+    }
 
     public void processChat(String chatText)
     {
