@@ -24,6 +24,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
 
                 // Since this is the local player, lets add a controller and fix the camera
                 aLocalPlayer.AddComponent<LocalPlayerController>();
+                aLocalPlayer.AddComponent<InputController>();
                 ourGWM.setLPC(aLocalPlayer.GetComponent<LocalPlayerController>());
                 ourGWM.getLPC().SetName(aCharacterName);
                 aLocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
