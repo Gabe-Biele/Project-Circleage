@@ -37,7 +37,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
             }
             else if(!anObjectIn.GetBool("IsLocal"))
             {
-                GameObject aRemotePlayer = ourGWM.createObject("Prefabs/PlayerBasic");
+                GameObject aRemotePlayer = ourGWM.createObject("Prefabs/Player/PlayerBasic");
 
                 aRemotePlayer.name = "GameCharacter_" + aCharacterName;
                 aRemotePlayer.AddComponent<RemotePlayerController>();
