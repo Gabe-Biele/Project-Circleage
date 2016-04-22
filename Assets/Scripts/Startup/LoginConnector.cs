@@ -84,8 +84,6 @@ public class LoginConnector : MonoBehaviour
     {
         if(buttonName == "LoginButton")
         {
-            Debug.Log("Username: " + UsernameTB.text);
-            Debug.Log("Password: " + PasswordTB.text);
             String EncryptedPW = PasswordUtil.MD5Password(PasswordTB.text);
             SFServer.Send(new LoginRequest(UsernameTB.text, EncryptedPW, GAME_ZONE));
             SFServer.Send(new JoinRoomRequest("Game"));

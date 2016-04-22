@@ -8,6 +8,8 @@ namespace Assets.Scripts.GameWorld.PlayerActions
 {
     public interface PlayerAction
     {
-        void PerformAction(GameObject ourSSO);
+        void performAction(GameObject ourSSO);
+        void activateRaycastLabel(GameObject anObject, GameUI ourUI);
+        bool withinMaxDistance(float distance);
     }
 }
