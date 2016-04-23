@@ -13,6 +13,7 @@ public class LocalPlayerController : MonoBehaviour
     private float PlayerSpeed = 10;
     private float RotationSpeed = 40;
     private Rigidbody PlayerRB;
+    private Item[] itemList;
     GameUI theUI;
 
     private Animator MecAnim;
@@ -27,6 +28,8 @@ public class LocalPlayerController : MonoBehaviour
         this.PlayerRB = this.GetComponent<Rigidbody>();
         this.MecAnim = this.GetComponentInChildren<Animator>();
         theUI = (GameUI)FindObjectOfType(typeof(GameUI));
+        int bagSize = 20;
+        itemList = new Item[bagSize];
 
     }
 
@@ -66,5 +69,10 @@ public class LocalPlayerController : MonoBehaviour
     public PlayerAction getPlayerAction()
     {
         return currentPlayerAction;
+    }
+
+    public void addItem(int itemID, string subLocation)
+    {
+        Debug.Log(itemList.Length);
     }
 }
