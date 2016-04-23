@@ -146,7 +146,7 @@
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\CenterNodeInformationHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\DespawnPlayerHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\GatherResourceHandler.cs" />
-    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\GetInventoryHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\InventoryUpdateHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\PositionUpdateHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ProcessChatHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\RotationUpdateHandler.cs" />

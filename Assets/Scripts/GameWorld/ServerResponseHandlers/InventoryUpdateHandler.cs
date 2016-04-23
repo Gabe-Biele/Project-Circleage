@@ -11,7 +11,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
 
         public void HandleResponse(ISFSObject anObjectIn, GameWorldManager ourGWM)
         {
-            Debug.Log("Inventory Update Recieved");
+            Debug.Log("Hello");
             int[] itemArray = anObjectIn.GetIntArray("IDArray");
             int[] quantityArray = anObjectIn.GetIntArray("QuantityArray");
             string[] locationArray = anObjectIn.GetUtfStringArray("SubLocationArray");
@@ -22,8 +22,10 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
             int itemPosition = 0;
             foreach (int itemID in itemArray)
             {
-                Debug.Log("Inputting item");
-                ourGWM.getLPC().addItem(itemID, locationArray[itemPosition], itemPosition, quantityArray[itemPosition]);
+                for (int i = 0; i < quantityArray[itemPosition]; i++)
+                {
+                    ourGWM.getLPC().addItem(itemID, locationArray[itemPosition]);
+                }
                 itemPosition++;
             }
 
