@@ -49,11 +49,13 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
         ourSRHDictionary.Add("SpawnSettlement", new SpawnSettlementHandler());
         ourSRHDictionary.Add("CenterNodeInformation", new CenterNodeInformationHandler());
-        ourSRHDictionary.Add("InventoryUpdate", new InventoryUpdateHandler());
+        //ourSRHDictionary.Add("InventoryUpdate", new InventoryUpdateHandler());
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());
+        Debug.Log("Spawning player");
         SFServer.Send(new ExtensionRequest("SpawnPlayer", ObjectIn));
+        //SFServer.Send(new ExtensionRequest("InventoryUpdate", ObjectIn));
     }
 
 
