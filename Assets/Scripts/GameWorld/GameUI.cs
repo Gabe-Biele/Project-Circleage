@@ -146,8 +146,8 @@ public class GameUI : MonoBehaviour
                     quantityText.GetComponent<Text>().text = theItem.quantity.ToString();
                     quantityText.SetActive(true);
 
-    }
-}
+                }
+            }
             inventoryOpen = true;
         }
         else if (inventoryOpen)
