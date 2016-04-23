@@ -165,7 +165,7 @@ public class LoginConnector : MonoBehaviour
             {
                 Debug.Log("Success, thanks for registering");
                 MessageText.GetComponent<Text>().text = "Success, thanks for registering";
-                SceneManager.LoadScene("CharacterSelection");
+                SceneManager.LoadScene("Login");
                 SFServer.RemoveAllEventListeners();
             }
             else
