@@ -12,6 +12,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
 
         public void HandleResponse(ISFSObject anObjectIn, GameWorldManager ourGWM)
         {
+            Debug.Log("Server spawning player.");
             float[] locationArray = anObjectIn.GetFloatArray("Location");
             float aRotation = anObjectIn.GetFloat("Rotation");
             string aCharacterName = anObjectIn.GetUtfString("CharacterName");
