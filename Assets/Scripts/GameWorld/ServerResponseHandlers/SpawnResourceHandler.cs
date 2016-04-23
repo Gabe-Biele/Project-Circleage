@@ -20,7 +20,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
             aResource.name = "Resource_" + aResourceName + "_" + ID;
             aResource.transform.position = new Vector3(location[0], location[1], location[2]);
 
-            //Add Newly spawned player to Dictionary
+            //Add Newly spawned resource to Dictionary
             ourGWM.getResourceDictionary().Add(ID, aResource);
         }
     }

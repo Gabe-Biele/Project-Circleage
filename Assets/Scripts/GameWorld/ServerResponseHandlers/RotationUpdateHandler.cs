@@ -20,7 +20,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
             else if(ourGWM.getPlayerDictionary().ContainsKey(aCharacterName))
             {
                 float Rotation = anObjectIn.GetFloat("Rotation");
-                Debug.Log(Rotation);
+                
                 ourGWM.getPlayerDictionary()[aCharacterName].GetComponent<RemotePlayerController>().SetRotation(Rotation);
             }
         }
