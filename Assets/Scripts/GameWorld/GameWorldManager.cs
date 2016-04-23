@@ -10,7 +10,6 @@ using System;
 using Sfs2X.Requests;
 using Sfs2X.Entities.Data;
 using Assets.Scripts.GameWorld.ServerResponseHandlers;
-using System.IO;
 
 public class GameWorldManager : MonoBehaviour
 {
@@ -23,8 +22,6 @@ public class GameWorldManager : MonoBehaviour
     private Dictionary<string, ServerResponseHandler> ourSRHDictionary = new Dictionary<string, ServerResponseHandler>();
     private Dictionary<int, GameObject> ourNPCDictionary = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> ourResourceDictionary = new Dictionary<int, GameObject>();
-    private Dictionary<int, String> itemNameDictionary = new Dictionary<int, string>();
-    private Dictionary<int, String> itemDescriptionDictionary = new Dictionary<int, string>();
 
     // Use this for initialization
     void Start ()
@@ -52,20 +49,10 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
         ourSRHDictionary.Add("SpawnSettlement", new SpawnSettlementHandler());
         ourSRHDictionary.Add("CenterNodeInformation", new CenterNodeInformationHandler());
-        ourSRHDictionary.Add("InventoryUpdate", new InventoryUpdateHandler());
-
-        //Load Items
-        string[] items = File.ReadAllLines("Assets\\Resources\\items.txt");
-        foreach (string itemInfo in items)
-        {
-            string[] splitItemInfo = itemInfo.Split('_');
-            itemNameDictionary.Add(Int32.Parse(splitItemInfo[0]), splitItemInfo[1]);
-            itemDescriptionDictionary.Add(Int32.Parse(splitItemInfo[0]), splitItemInfo[2]);
-        }
+        ourSRHDictionary.Add("GetInventory", new GetInventoryHandler());
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());
-        Debug.Log("Spawning player");
         SFServer.Send(new ExtensionRequest("SpawnPlayer", ObjectIn));
     }
 
@@ -134,13 +121,5 @@ public class GameWorldManager : MonoBehaviour
     public Dictionary<int, GameObject> getResourceDictionary()
     {
         return this.ourResourceDictionary;
-    }
-    public Dictionary<int, String> getItemNameDictionary()
-    {
-        return this.itemNameDictionary;
-    }
-    public Dictionary<int, String> getItemDescriptionDictionary()
-    {
-        return this.itemDescriptionDictionary;
     }
 }
