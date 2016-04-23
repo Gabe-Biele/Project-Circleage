@@ -11,23 +11,33 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
 
         public void HandleResponse(ISFSObject anObjectIn, GameWorldManager ourGWM)
         {
+
             Debug.Log("Inventory Update Recieved");
-            int[] itemArray = anObjectIn.GetIntArray("IDArray");
+            int[] iDArray = anObjectIn.GetIntArray("IDArray");
+            int[] itemArray = anObjectIn.GetIntArray("ItemIDArray");
             int[] quantityArray = anObjectIn.GetIntArray("QuantityArray");
+            string[] nameArray = anObjectIn.GetUtfStringArray("NameArray");
+            string[] descriptionArray = anObjectIn.GetUtfStringArray("DescriptionArray");
             string[] locationArray = anObjectIn.GetUtfStringArray("SubLocationArray");
-            if (itemArray.Length != quantityArray.Length)
+
+            if(itemArray.Length != quantityArray.Length)
             {
                 Debug.Log("Item array and quantity array are not the same size.");
             }
-            int itemPosition = 0;
-            foreach (int itemID in itemArray)
+            int iPos = 0;
+            foreach (int ID in iDArray)
             {
-                Debug.Log("Inputting item");
-                ourGWM.getLPC().addItem(itemID, locationArray[itemPosition], itemPosition, quantityArray[itemPosition]);
-                itemPosition++;
+                //If the inventory already has this item in it, simply update its data.
+                if(ourGWM.getLPC().getInventory().ContainsKey(ID))
+                {
+                    ourGWM.getLPC().getInventory()[ID].updateItemData(itemArray[iPos], quantityArray[iPos], nameArray[iPos], descriptionArray[iPos], locationArray[iPos]);
+                }
+                else if(!ourGWM.getLPC().getInventory().ContainsKey(ID))
+                {
+                    ourGWM.getLPC().getInventory().Add(ID, new Item(ID, itemArray[iPos], quantityArray[iPos], nameArray[iPos], descriptionArray[iPos], locationArray[iPos]));
+                }
+                iPos++;
             }
-
-
         }
     }
 }
