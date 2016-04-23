@@ -49,6 +49,7 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
         ourSRHDictionary.Add("SpawnSettlement", new SpawnSettlementHandler());
         ourSRHDictionary.Add("CenterNodeInformation", new CenterNodeInformationHandler());
+        ourSRHDictionary.Add("GetInventory", new GetInventoryHandler());
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());

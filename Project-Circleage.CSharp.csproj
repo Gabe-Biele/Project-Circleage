@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\GameWorld\Controllers\RemotePlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameUI.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameWorldManager.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\Item.cs" />
     <Compile Include="Assets\Scripts\GameWorld\PlayerActions\CenterNodeAction.cs" />
     <Compile Include="Assets\Scripts\GameWorld\PlayerActions\GatherResourceAction.cs" />
     <Compile Include="Assets\Scripts\GameWorld\PlayerActions\PlayerAction.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\CenterNodeInformationHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\DespawnPlayerHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\GatherResourceHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\GetInventoryHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\PositionUpdateHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ProcessChatHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\RotationUpdateHandler.cs" />
