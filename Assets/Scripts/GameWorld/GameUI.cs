@@ -87,7 +87,6 @@ public class GameUI : MonoBehaviour
         SFServer.Send(new ExtensionRequest("ProcessChat", ObjectIn));
     }
 
-    #endregion Chat Box
     public void QuitButton_Clicked()
     {
         Application.Quit();
