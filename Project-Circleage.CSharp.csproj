@@ -95,6 +95,15 @@
     <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\Displace.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\MeshContainer.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\PlanarReflection.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\SpecularLighting.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\ActivateTrigger.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\AutoMoveAndRotate.cs" />
@@ -151,10 +160,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AssetStoreTools\AdventureForge\Read me.txt" />
-    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard&apos;s\Wizard_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard&apos;s\Wizard_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Readme.txt" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_Standard.shader" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_UnityStandardCore.cginc" />
@@ -172,6 +181,11 @@
     <None Include="Assets\AssetStoreTools\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\AssetStoreTools\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
     <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Assets\Shaders\BillboardTree.shader" />
     <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Assets\Shaders\FastTreeCreatorLeaves.shader" />
     <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Assets\Shaders\FastTreeCreatorLeavesOptimized.shader" />
