@@ -125,33 +125,41 @@ public class GameUI : MonoBehaviour
     {
         if (!inventoryOpen)
         {
+            //Switch Cursor Mode
+            Camera.main.GetComponent<CameraController>().setCursorVisible(true);
+
             ourLPC = GameObject.FindObjectOfType<LocalPlayerController>();
             aInventoryPanel = ourGWM.createObject("UI/InventoryWindow");
             aInventoryPanel.name = "InventoryPanel";
             aInventoryPanel.transform.SetParent(GameObject.Find("UICanvas").transform);
             aInventoryPanel.transform.localPosition = new Vector3(456, -160, 0);
-            List<Item> itemList = ourLPC.getItems();
-            int position = 0;
-            foreach (Item theItem in itemList)
-            {
-                string path = "ItemImages/" + theItem.ID.ToString();
-                Sprite itemImage = Resources.Load(path, typeof(Sprite)) as Sprite;
-                Debug.Log(itemImage);
-                Image itemImageObject = aInventoryPanel.transform.FindChild("Items").FindChild("Item " + position.ToString()).gameObject.GetComponent<Image>();
-                itemImageObject.sprite = itemImage;
-                if (theItem.quantity > 1)
-                {
-                    Debug.Log("Bum bum");
-                    GameObject quantityText = itemImageObject.transform.FindChild("QuantityText").gameObject;
-                    quantityText.GetComponent<Text>().text = theItem.quantity.ToString();
-                    quantityText.SetActive(true);
 
+            foreach (KeyValuePair<int, Item> entry in ourLPC.getInventory())
+            {
+                if(entry.Value.inInventory())
+                {
+                    string path = "ItemImages/" + entry.Value.getItemID().ToString();
+                    Sprite itemImage = Resources.Load(path, typeof(Sprite)) as Sprite;
+
+                    Image itemImageObject = aInventoryPanel.transform.FindChild("Items").FindChild("Item " + entry.Value.getPosition().ToString()).gameObject.GetComponent<Image>();
+                    itemImageObject.sprite = itemImage;
+                    if(entry.Value.getQuantity() > 1)
+                    {
+                        Debug.Log("Bum bum");
+                        GameObject quantityText = itemImageObject.transform.FindChild("QuantityText").gameObject;
+                        quantityText.GetComponent<Text>().text = entry.Value.getQuantity().ToString();
+                        quantityText.SetActive(true);
+
+                    }
                 }
             }
             inventoryOpen = true;
         }
         else if (inventoryOpen)
         {
+            //Switch Cursor Mode
+            Camera.main.GetComponent<CameraController>().setCursorVisible(false);
+
             Destroy(aInventoryPanel);
             inventoryOpen = false;
         }
