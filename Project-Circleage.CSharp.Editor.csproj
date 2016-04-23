@@ -151,6 +151,7 @@
     <None Include="Assets\AssetStoreTools\TerrainComposer\Update\check.txt" />
     <None Include="Assets\AssetStoreTools\TerrainComposer\Update\last_checked.txt" />
     <None Include="Assets\AssetStoreTools\TerrainComposer\Update\version.txt" />
+    <None Include="Assets\Resources\items.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

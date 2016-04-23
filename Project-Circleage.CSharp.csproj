@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -156,7 +158,7 @@
     <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard&apos;s\Wizard_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard's\Wizard_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Readme.txt" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_Standard.shader" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_UnityStandardCore.cginc" />
