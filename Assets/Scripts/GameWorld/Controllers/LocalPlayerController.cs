@@ -13,6 +13,8 @@ public class LocalPlayerController : MonoBehaviour
     private float PlayerSpeed = 10;
     private float RotationSpeed = 40;
     private Rigidbody PlayerRB;
+
+    private Dictionary<int, Item> playerInventory = new Dictionary<int, Item>();
     private List<Item> itemList;
     GameUI theUI;
 
@@ -68,10 +70,12 @@ public class LocalPlayerController : MonoBehaviour
     {
         return currentPlayerAction;
     }
-
-    public void addItem(int itemID, string subLocation, int baglocation, int quantity)
+    public Dictionary<int, Item> getInventory()
     {
-        Debug.Log("Sup");
+        return playerInventory;
+    }
+    /*public void addItem(int itemID, string subLocation, int baglocation, int quantity)
+    {
         if(ourGWM == null)
         {
             ourGWM = GameObject.Find("SceneScriptsObject").GetComponent<GameWorldManager>();
@@ -95,10 +99,5 @@ public class LocalPlayerController : MonoBehaviour
             itemAdded.setDescription(itemDesc);
         }
         itemList.Add(itemAdded);
-    }
-    public List<Item> getItems()
-    {
-        Debug.Log(itemList.Count);
-        return itemList;
-    }
+    }*/
 }
