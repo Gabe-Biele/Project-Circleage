@@ -6,11 +6,12 @@ using UnityEngine;
 
 namespace Assets.Scripts.GameWorld.ServerResponseHandlers
 {
-    class GetInventoryHandler : ServerResponseHandler
+    class InventoryUpdateHandler : ServerResponseHandler
     {
 
         public void HandleResponse(ISFSObject anObjectIn, GameWorldManager ourGWM)
         {
+            Debug.Log("Hello");
             int[] itemArray = anObjectIn.GetIntArray("IDArray");
             int[] quantityArray = anObjectIn.GetIntArray("QuantityArray");
             string[] locationArray = anObjectIn.GetUtfStringArray("SubLocationArray");
