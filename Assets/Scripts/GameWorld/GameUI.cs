@@ -19,10 +19,6 @@ public class GameUI : MonoBehaviour
 
     private GameObject ChatContent;
     private List<GameObject> ChatTextLabel;
-    private GameWorldManager ourGWM;
-    bool inventoryOpen;
-    GameObject aInventoryPanel;
-    private LocalPlayerController ourLPC;
 
     private GameObject rayCastLabel;
 
@@ -31,7 +27,7 @@ public class GameUI : MonoBehaviour
    void Start()
     {
         SFServer = SmartFoxConnection.Connection;
-        ourGWM = GameObject.Find("SceneScriptsObject").GetComponent<GameWorldManager>();
+
         ChatTB = GameObject.Find("ChatTB").GetComponent<InputField>();
         ChatContent = GameObject.Find("ChatContent");
         ChatTextLabel = new List<GameObject>();
@@ -39,7 +35,6 @@ public class GameUI : MonoBehaviour
         rayCastLabel = GameObject.Find("RayCastLabel");
         rayCastLabel.SetActive(false);
         ChatTBisFocused = false;
-        inventoryOpen = false;
     }
 
     // Update is called once per frame
@@ -86,6 +81,7 @@ public class GameUI : MonoBehaviour
         ObjectIn.PutUtfString("ChatText", this.ChatText);
         SFServer.Send(new ExtensionRequest("ProcessChat", ObjectIn));
     }
+
     public void QuitButton_Clicked()
     {
         Application.Quit();
@@ -122,37 +118,6 @@ public class GameUI : MonoBehaviour
 
     public void OpenInventory()
     {
-        if (!inventoryOpen)
-        {
-            ourLPC = GameObject.FindObjectOfType<LocalPlayerController>();
-            aInventoryPanel = ourGWM.createObject("UI/InventoryWindow");
-            aInventoryPanel.name = "InventoryPanel";
-            aInventoryPanel.transform.SetParent(GameObject.Find("UICanvas").transform);
-            aInventoryPanel.transform.localPosition = new Vector3(456, -160, 0);
-            List<Item> itemList = ourLPC.getItems();
-            int position = 0;
-            foreach (Item theItem in itemList)
-            {
-                string path = "ItemImages/" + theItem.ID.ToString();
-                Sprite itemImage = Resources.Load(path, typeof(Sprite)) as Sprite;
-                Debug.Log(itemImage);
-                Image itemImageObject = aInventoryPanel.transform.FindChild("Items").FindChild("Item " + position.ToString()).gameObject.GetComponent<Image>();
-                itemImageObject.sprite = itemImage;
-                if (theItem.quantity > 1)
-                {
-                    Debug.Log("Bum bum");
-                    GameObject quantityText = itemImageObject.transform.FindChild("QuantityText").gameObject;
-                    quantityText.GetComponent<Text>().text = theItem.quantity.ToString();
-                    quantityText.SetActive(true);
 
-                }
-            }
-            inventoryOpen = true;
-        }
-        else if (inventoryOpen)
-        {
-            Destroy(aInventoryPanel);
-            inventoryOpen = false;
-        }
     }
 }
