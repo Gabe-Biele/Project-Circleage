@@ -8,6 +8,7 @@ using Sfs2X;
 using Sfs2X.Core;
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
+using UnityEngine.EventSystems;
 
 public class GameUI : MonoBehaviour
 {
@@ -139,17 +140,20 @@ public class GameUI : MonoBehaviour
                 if(entry.Value.inInventory())
                 {
                     string path = "ItemImages/" + entry.Value.getItemID().ToString();
-                    Sprite itemImage = Resources.Load(path, typeof(Sprite)) as Sprite;
+                    Sprite itemImageSprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
-                    Image itemImageObject = aInventoryPanel.transform.FindChild("Items").FindChild("Item " + entry.Value.getPosition().ToString()).gameObject.GetComponent<Image>();
-                    itemImageObject.sprite = itemImage;
+                    GameObject itemImageObject = aInventoryPanel.transform.FindChild("Items").FindChild("Item " + entry.Value.getPosition().ToString()).gameObject;
+                    ItemImageHandler itemHandler = itemImageObject.AddComponent<ItemImageHandler>();
+                    itemHandler.thisItem = entry.Value;
+                    itemHandler.ourUI = this;
+                    Image itemImage = itemImageObject.GetComponent<Image>();
+                    itemImage.sprite = itemImageSprite;
+                    Debug.Log("Set sprite.");
                     if(entry.Value.getQuantity() > 1)
                     {
-                        Debug.Log("Bum bum");
-                        GameObject quantityText = itemImageObject.transform.FindChild("QuantityText").gameObject;
+                        GameObject quantityText = itemImage.transform.FindChild("QuantityText").gameObject;
                         quantityText.GetComponent<Text>().text = entry.Value.getQuantity().ToString();
                         quantityText.SetActive(true);
-
                     }
                 }
             }
@@ -163,5 +167,16 @@ public class GameUI : MonoBehaviour
             Destroy(aInventoryPanel);
             inventoryOpen = false;
         }
+    }
+
+    public GameObject drawHoverBox(Item theItem)
+    {
+        GameObject aHoverBox = ourGWM.createObject("UI/HoverWindow");
+        aHoverBox.name = "HoverWindow";
+        aHoverBox.transform.SetParent(GameObject.Find("UICanvas").transform);
+        aHoverBox.transform.position = Input.mousePosition + new Vector3(50, -25);
+        aHoverBox.transform.FindChild("Name").gameObject.GetComponent<Text>().text = theItem.getName();
+        aHoverBox.transform.FindChild("Description").gameObject.GetComponent<Text>().text = theItem.getDescription();
+        return aHoverBox;
     }
 }

@@ -46,4 +46,14 @@ public class Item : MonoBehaviour
     {
         return aQuantity;
     }
+
+    public string getName()
+    {
+        return aName;
+    }
+
+    public string getDescription()
+    {
+        return aDescription;
+    }
 }
