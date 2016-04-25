@@ -22,7 +22,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
             aContributionPanel.transform.FindChild("LevelLabel").GetComponent<Text>().text = "(Level " + anObjectIn.GetInt("CenterNodeLevel").ToString() + ")";
             aContributionPanel.transform.FindChild("CurrentContributionLabel").GetComponent<Text>().text = anObjectIn.GetInt("Contribution").ToString();
             aContributionPanel.transform.FindChild("ContributionCapTotalLabel").GetComponent<Text>().text = anObjectIn.GetInt("ContributionCap").ToString();
-            aContributionPanel.transform.FindChild("ContributionPB").GetComponent<Scrollbar>().size = anObjectIn.GetInt("CurrentTNL") / anObjectIn.GetInt("TotalTNL");
+            aContributionPanel.transform.FindChild("ContributionPB").GetComponent<Scrollbar>().size = (float)anObjectIn.GetInt("CurrentTNL") / (float)anObjectIn.GetInt("TotalTNL");
             aContributionPanel.transform.FindChild("ContributionPB").FindChild("ContributionText").GetComponent<Text>().text = anObjectIn.GetInt("CurrentTNL").ToString() + " / " + anObjectIn.GetInt("TotalTNL").ToString();
             aContributionPanel.transform.FindChild("CurrentFoodLabel").GetComponent<Text>().text = anObjectIn.GetInt("CurrentFood").ToString();
         }

@@ -49,7 +49,7 @@ public class ItemImageHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
         }
         else if(isHovered&&hoverboxExists)
         {
-            hoverbox.transform.position = Input.mousePosition + new Vector3(50,-25);
+            hoverbox.transform.position = Input.mousePosition + new Vector3(-95, 47);
         }
         if(!isHovered)
         {
