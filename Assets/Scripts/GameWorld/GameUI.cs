@@ -133,7 +133,18 @@ public class GameUI : MonoBehaviour
             aInventoryPanel = ourGWM.createObject("UI/InventoryWindow");
             aInventoryPanel.name = "InventoryPanel";
             aInventoryPanel.transform.SetParent(GameObject.Find("UICanvas").transform);
-            aInventoryPanel.transform.localPosition = new Vector3(456, -160, 0);
+            aInventoryPanel.transform.localPosition = new Vector3(300, -160, 0);
+
+            for(int x = 0; x < 6; x++)
+            {
+                for(int y = 0; y < 10; y++)
+                {
+                    GameObject anItemSlot = (GameObject)Instantiate(Resources.Load("UI/ItemSlot", typeof(GameObject)));
+                    anItemSlot.transform.parent = aInventoryPanel.transform.FindChild("Items").transform;
+                    anItemSlot.name = "Item " + (x * 10 + y).ToString();
+                    anItemSlot.transform.localPosition = new Vector3(-220 + (y * 45), 120 - (x * 45));
+                }
+            }
 
             foreach (KeyValuePair<int, Item> entry in ourLPC.getInventory())
             {
@@ -149,12 +160,14 @@ public class GameUI : MonoBehaviour
                     Image itemImage = itemImageObject.GetComponent<Image>();
                     itemImage.sprite = itemImageSprite;
                     Debug.Log("Set sprite.");
+
+                    GameObject quantityText = itemImage.transform.FindChild("QuantityText").gameObject;
                     if(entry.Value.getQuantity() > 1)
                     {
-                        GameObject quantityText = itemImage.transform.FindChild("QuantityText").gameObject;
                         quantityText.GetComponent<Text>().text = entry.Value.getQuantity().ToString();
                         quantityText.SetActive(true);
                     }
+                    else quantityText.SetActive(false);
                 }
             }
             inventoryOpen = true;
@@ -174,7 +187,7 @@ public class GameUI : MonoBehaviour
         GameObject aHoverBox = ourGWM.createObject("UI/HoverWindow");
         aHoverBox.name = "HoverWindow";
         aHoverBox.transform.SetParent(GameObject.Find("UICanvas").transform);
-        aHoverBox.transform.position = Input.mousePosition + new Vector3(50, -25);
+        aHoverBox.transform.position = Input.mousePosition + new Vector3(-95, 47);
         aHoverBox.transform.FindChild("Name").gameObject.GetComponent<Text>().text = theItem.getName();
         aHoverBox.transform.FindChild("Description").gameObject.GetComponent<Text>().text = theItem.getDescription();
         return aHoverBox;
