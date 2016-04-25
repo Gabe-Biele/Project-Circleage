@@ -10,10 +10,12 @@ public class ItemImageHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public GameUI ourUI;
     public GameObject hoverbox;
     bool hoverboxExists;
+    bool isDragging;
 
     public void OnDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        ourUI.attachImagetoPointer(thisItem);
+        isHovered = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -55,6 +57,10 @@ public class ItemImageHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             Destroy(hoverbox);
             hoverboxExists = false;
+        }
+        if(isDragging)
+        {
+            thisItem.transform.position = Input.mousePosition;
         }
 
 	}

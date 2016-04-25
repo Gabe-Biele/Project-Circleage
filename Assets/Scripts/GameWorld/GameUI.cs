@@ -17,7 +17,6 @@ public class GameUI : MonoBehaviour
     private InputField ChatTB;
    private bool ChatTBisFocused;
     private string ChatText;
-
     private GameObject ChatContent;
     private List<GameObject> ChatTextLabel;
     private GameWorldManager ourGWM;
@@ -139,6 +138,7 @@ public class GameUI : MonoBehaviour
             {
                 if(entry.Value.inInventory())
                 {
+                    Debug.Log(entry.Key);
                     string path = "ItemImages/" + entry.Value.getItemID().ToString();
                     Sprite itemImageSprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
@@ -179,4 +179,14 @@ public class GameUI : MonoBehaviour
         aHoverBox.transform.FindChild("Description").gameObject.GetComponent<Text>().text = theItem.getDescription();
         return aHoverBox;
     }
+
+
+
+    public void attachImagetoPointer(Item movedItem)
+    {
+        GameObject itemImageObject = aInventoryPanel.transform.FindChild("Items").FindChild("Item " + movedItem.getPosition().ToString()).gameObject;
+        itemImageObject.transform.position = Input.mousePosition;
+
+    }
+
 }
