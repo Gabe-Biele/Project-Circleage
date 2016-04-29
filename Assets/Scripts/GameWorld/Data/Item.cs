@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class Item : MonoBehaviour
+public class Item
 {
     private int anID;
     private int anItemID;
@@ -36,6 +36,10 @@ public class Item : MonoBehaviour
     public string getPosition()
     {
         return aLocation.Split('_')[1];
+    }
+    public string getLocation()
+    {
+        return aLocation;
     }
     public int getItemID()
     {

@@ -29,10 +29,13 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
                 ourGWM.setLPC(aLocalPlayer.GetComponent<LocalPlayerController>());
                 ourGWM.getLPC().SetName(aCharacterName);
                 aLocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
-                Camera.main.transform.parent = aLocalPlayer.transform;
+
+
                 GameObject cameraAttach = new GameObject();
                 cameraAttach.transform.parent = aLocalPlayer.transform;
                 cameraAttach.transform.localPosition = new Vector3(1f, 2.5f, 1.0f);
+                cameraAttach.name = "Camera Target";
+                Camera.main.transform.parent = cameraAttach.transform;
                 Camera.main.GetComponent<CameraController>().setTarget(cameraAttach);
                 Camera.main.GetComponent<CameraController>().setCursorVisible(false);
             }

@@ -18,6 +18,8 @@ public class RayCastManager : MonoBehaviour
 
         ourPlayerActionDictionary.Add("Resource", new GatherResourceAction());
         ourPlayerActionDictionary.Add("Center Node", new CenterNodeAction());
+        ourPlayerActionDictionary.Add("Use Item", new UseItemAction());
+        ourPlayerActionDictionary.Add("ContributeCenterNode", new ContributeCenterNodeAction());
     }
 	
 	// Update is called once per frame

@@ -33,27 +33,37 @@ public class CameraController : MonoBehaviour
         {
             if(!CursorMode)
             {
-                deltaX = Input.GetAxis("Mouse X");
-                cameraPosition = Quaternion.AngleAxis(deltaX * sensitivityX, Vector3.up) * cameraPosition;
-                deltaY = Input.GetAxis("Mouse Y");
-                cameraPosition = Quaternion.AngleAxis(deltaY * sensitivityY, Vector3.left) * cameraPosition;
-                Vector3 proposedLocalPosition = cameraTarget.localPosition + cameraPosition;
-                if(proposedLocalPosition.y < 0.2f)
+                deltaX = Input.GetAxis("Mouse X") * sensitivityX;
+                deltaY = Input.GetAxis("Mouse Y") * sensitivityY;
+                cameraTarget.RotateAround(cameraTarget.parent.position, Vector3.up, deltaX);
+                cameraTarget.Rotate(Vector3.left, deltaY);
+                if(cameraTarget.localEulerAngles.x > 60 && cameraTarget.localEulerAngles.x < 230)
                 {
-                    proposedLocalPosition = new Vector3(proposedLocalPosition.x, 0.2f, proposedLocalPosition.z);
+                    cameraTarget.localRotation = Quaternion.Euler(60, cameraTarget.localEulerAngles.y, cameraTarget.localEulerAngles.z);
                 }
-                this.transform.localPosition = proposedLocalPosition;
+                if(cameraTarget.localEulerAngles.x < 345 && cameraTarget.localEulerAngles.x > 230)
+                {
+                    cameraTarget.localRotation = Quaternion.Euler(345, cameraTarget.localEulerAngles.y, cameraTarget.localEulerAngles.z);
+                }
+
+                if(Input.GetAxis("Mouse ScrollWheel") != 0)
+                {
+                    float desiredDistance = transform.localPosition.z - Input.GetAxis("Mouse ScrollWheel") * 3;
+                    desiredDistance = Mathf.Clamp(desiredDistance, -22, -6);
+                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, desiredDistance);
+                }
             }
             this.transform.LookAt(cameraTarget);
         }
     }
     public void ResetCamera()
     {
-        cameraPosition = new Vector3(0, cameraPosition.y, -8);
+        cameraPosition = new Vector3(0, cameraPosition.y, cameraPosition.z);
     }
     public void setTarget(GameObject cameraPoint)
     {
         cameraTarget = cameraPoint.transform;
+        transform.localPosition = new Vector3(0, 2, -8);
     }
     public void setCursorVisible(bool cm)
     {

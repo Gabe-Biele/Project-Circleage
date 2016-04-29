@@ -51,6 +51,7 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("ProcessChat", new ProcessChatHandler());
         ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
         ourSRHDictionary.Add("SpawnSettlement", new SpawnSettlementHandler());
+        ourSRHDictionary.Add("SpawnNode", new SpawnNodeHandler());
         ourSRHDictionary.Add("CenterNodeInformation", new CenterNodeInformationHandler());
         ourSRHDictionary.Add("InventoryUpdate", new InventoryUpdateHandler());
 

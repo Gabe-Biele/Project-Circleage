@@ -12,6 +12,7 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
         public void HandleResponse(ISFSObject anObjectIn, GameWorldManager ourGWM)
         {
 
+
             Debug.Log("Inventory Update Recieved");
             int[] iDArray = anObjectIn.GetIntArray("IDArray");
             int[] itemArray = anObjectIn.GetIntArray("ItemIDArray");
@@ -19,6 +20,13 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
             string[] nameArray = anObjectIn.GetUtfStringArray("NameArray");
             string[] descriptionArray = anObjectIn.GetUtfStringArray("DescriptionArray");
             string[] locationArray = anObjectIn.GetUtfStringArray("SubLocationArray");
+
+            bool reopenInventory = false;
+            if(GameObject.Find("InventoryPanel") != null)
+            {
+                GameObject.Find("SceneScriptsObject").GetComponent<GameUI>().openInventory();
+                reopenInventory = true;
+            }
 
             if(itemArray.Length != quantityArray.Length)
             {
@@ -37,6 +45,10 @@ namespace Assets.Scripts.GameWorld.ServerResponseHandlers
                     ourGWM.getLPC().getInventory().Add(ID, new Item(ID, itemArray[iPos], quantityArray[iPos], nameArray[iPos], descriptionArray[iPos], locationArray[iPos]));
                 }
                 iPos++;
+            }
+            if(reopenInventory)
+            {
+                GameObject.Find("SceneScriptsObject").GetComponent<GameUI>().openInventory();
             }
         }
     }

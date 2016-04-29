@@ -21,8 +21,11 @@ public class GameUI : MonoBehaviour
     private GameObject ChatContent;
     private List<GameObject> ChatTextLabel;
     private GameWorldManager ourGWM;
+    private RayCastManager ourRCM;
     bool inventoryOpen;
+
     GameObject aInventoryPanel;
+    private Item currentInventoryItem;
     private LocalPlayerController ourLPC;
 
     private GameObject rayCastLabel;
@@ -33,6 +36,7 @@ public class GameUI : MonoBehaviour
     {
         SFServer = SmartFoxConnection.Connection;
         ourGWM = GameObject.Find("SceneScriptsObject").GetComponent<GameWorldManager>();
+        ourRCM = GameObject.Find("SceneScriptsObject").GetComponent<RayCastManager>();
         ChatTB = GameObject.Find("ChatTB").GetComponent<InputField>();
         ChatContent = GameObject.Find("ChatContent");
         ChatTextLabel = new List<GameObject>();
@@ -63,10 +67,13 @@ public class GameUI : MonoBehaviour
                 this.ChatTBisFocused = true;
             }
         }
-
+        if(Input.GetMouseButtonDown(1) && currentInventoryItem != null)
+        {
+            ourRCM.ourPlayerActionDictionary["Use Item"].performAction(GameObject.Find("SceneScriptsObject"));
+        }
         if(Input.GetKeyDown(KeyCode.I))
         {
-            OpenInventory();
+            openInventory();
         }
     }
 
@@ -95,6 +102,12 @@ public class GameUI : MonoBehaviour
     public void contributionExitButton_Clicked()
     {
         Destroy(GameObject.Find("ContributionPanel"));
+        //Switch Cursor Mode
+        Camera.main.GetComponent<CameraController>().setCursorVisible(false);
+    }
+    public void contributionButton_Clicked()
+    {
+        ourRCM.ourPlayerActionDictionary["ContributeCenterNode"].performAction(GameObject.Find("SceneScriptsObject"));
     }
 
     public void processChat(String chatText)
@@ -122,7 +135,7 @@ public class GameUI : MonoBehaviour
         return ChatTB.isFocused;
     }
 
-    public void OpenInventory()
+    public void openInventory()
     {
         if (!inventoryOpen)
         {
@@ -177,9 +190,21 @@ public class GameUI : MonoBehaviour
             //Switch Cursor Mode
             Camera.main.GetComponent<CameraController>().setCursorVisible(false);
 
+            if(GameObject.Find("HoverWindow") != null)
+            {
+                Destroy(GameObject.Find("HoverWindow"));
+            }
             Destroy(aInventoryPanel);
             inventoryOpen = false;
         }
+    }
+    public void setCurrentInventoryItem(Item i)
+    {
+        currentInventoryItem = i;
+    }
+    public Item getCurrentInventoryItem()
+    {
+        return currentInventoryItem;
     }
 
     public GameObject drawHoverBox(Item theItem)
@@ -187,7 +212,7 @@ public class GameUI : MonoBehaviour
         GameObject aHoverBox = ourGWM.createObject("UI/HoverWindow");
         aHoverBox.name = "HoverWindow";
         aHoverBox.transform.SetParent(GameObject.Find("UICanvas").transform);
-        aHoverBox.transform.position = Input.mousePosition + new Vector3(-95, 47);
+        aHoverBox.transform.position = Input.mousePosition + new Vector3(-95, 51);
         aHoverBox.transform.FindChild("Name").gameObject.GetComponent<Text>().text = theItem.getName();
         aHoverBox.transform.FindChild("Description").gameObject.GetComponent<Text>().text = theItem.getDescription();
         return aHoverBox;

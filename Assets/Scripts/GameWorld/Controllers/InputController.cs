@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour
     private float PlayerSpeed = 10;
     private float RotationSpeed = 40;
     private Rigidbody PlayerRB;
+    private Transform crosshairTransform;
     public LocalPlayerController ourLPC;
     GameUI theUI;
 
@@ -26,6 +27,7 @@ public class InputController : MonoBehaviour
         SFServer = SmartFoxConnection.Connection;
 
         this.PlayerRB = this.GetComponent<Rigidbody>();
+        crosshairTransform = Camera.main.transform.parent;
         this.MecAnim = this.GetComponentInChildren<Animator>();
         this.ourLPC = this.GetComponentInParent<LocalPlayerController>();
         theUI = (GameUI)FindObjectOfType(typeof(GameUI));
@@ -43,6 +45,14 @@ public class InputController : MonoBehaviour
                 ObjectIn.PutFloatArray("Location", ourLPC.GetLocation());
                 ObjectIn.PutBool("IsMoving", true);
                 SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
+
+                // First rotation
+                this.PlayerRB.transform.Rotate(0, crosshairTransform.localRotation.eulerAngles.y, 0);
+                crosshairTransform.localRotation = Quaternion.Euler(crosshairTransform.localEulerAngles.x, 0, crosshairTransform.localEulerAngles.z);
+                crosshairTransform.localPosition = new Vector3(1f, 2.5f, 1.0f);
+                ObjectIn = new SFSObject();
+                ObjectIn.PutFloat("Rotation", ourLPC.GetRotation());
+                SFServer.Send(new ExtensionRequest("RotationUpdate", ObjectIn));
             }
             if (Input.GetKeyUp(KeyCode.W))
             {
@@ -57,20 +67,16 @@ public class InputController : MonoBehaviour
             {
                 CameraController cameraControllerObj = (CameraController)Camera.main.GetComponent("CameraController");
                 cameraControllerObj.setCursorVisible(false);
-                this.PlayerRB.transform.Rotate(0, Camera.main.transform.localRotation.eulerAngles.y, 0);
-                cameraControllerObj.ResetCamera();
                 this.PlayerRB.MovePosition(transform.position + (transform.forward * Time.deltaTime * PlayerSpeed));
-            }
-
-            // Left/right makes player model rotate around own axis
-            float rotation = Input.GetAxis("Horizontal");
-            if (rotation != 0)
-            {
-                this.transform.Rotate(Vector3.up, rotation * Time.deltaTime * RotationSpeed);
             }
             
             if (Input.GetKey(KeyCode.W) && Input.GetAxis("Mouse X") != 0)
             {
+                // Take Cross Hair's rotate, and reset crosshair
+                this.PlayerRB.transform.Rotate(0, crosshairTransform.localRotation.eulerAngles.y, 0);
+                crosshairTransform.localRotation = Quaternion.Euler(crosshairTransform.localEulerAngles.x, 0, crosshairTransform.localEulerAngles.z);
+                crosshairTransform.localPosition = new Vector3(1f, 2.5f, 1.0f);
+
                 ISFSObject ObjectIn = new SFSObject();
                 ObjectIn.PutFloat("Rotation", ourLPC.GetRotation());
                 SFServer.Send(new ExtensionRequest("RotationUpdate", ObjectIn));
