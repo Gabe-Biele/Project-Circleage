@@ -9,15 +9,22 @@ using Sfs2X.Entities;
 using System;
 using Sfs2X.Requests;
 using Sfs2X.Entities.Data;
+using Assets.Scripts.GameWorld.ServerResponseHandlers;
+using System.IO;
 
 public class GameWorldManager : MonoBehaviour
 {
     private SmartFox SFServer;
 
     private GameObject LocalPlayer;
-    private LocalPlayerController OurLPC;
+    private LocalPlayerController ourLPC;
 
-    private Dictionary<string, GameObject> PlayerDictionary = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> ourPlayerDictionary = new Dictionary<string, GameObject>();
+    private Dictionary<string, ServerResponseHandler> ourSRHDictionary = new Dictionary<string, ServerResponseHandler>();
+    private Dictionary<int, GameObject> ourNPCDictionary = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> ourResourceDictionary = new Dictionary<int, GameObject>();
+    private Dictionary<int, String> itemNameDictionary = new Dictionary<int, string>();
+    private Dictionary<int, String> itemDescriptionDictionary = new Dictionary<int, string>();
 
     // Use this for initialization
     void Start ()
@@ -34,8 +41,23 @@ public class GameWorldManager : MonoBehaviour
         SFServer.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
         SFServer.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtensionResponse);
 
+        //Register ServerResponseHandlers
+        ourSRHDictionary.Add("SpawnPlayer", new SpawnPlayerHandler());
+        ourSRHDictionary.Add("DespawnPlayer", new DespawnPlayerHandler());
+        ourSRHDictionary.Add("PositionUpdate", new PositionUpdateHandler());
+        ourSRHDictionary.Add("RotationUpdate", new RotationUpdateHandler());
+        ourSRHDictionary.Add("SpawnNPC", new SpawnNPCHandler());
+        ourSRHDictionary.Add("SpawnResource", new SpawnResourceHandler());
+        ourSRHDictionary.Add("ProcessChat", new ProcessChatHandler());
+        ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
+        ourSRHDictionary.Add("SpawnSettlement", new SpawnSettlementHandler());
+        ourSRHDictionary.Add("SpawnNode", new SpawnNodeHandler());
+        ourSRHDictionary.Add("CenterNodeInformation", new CenterNodeInformationHandler());
+        ourSRHDictionary.Add("InventoryUpdate", new InventoryUpdateHandler());
+
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());
+        Debug.Log("Spawning player");
         SFServer.Send(new ExtensionRequest("SpawnPlayer", ObjectIn));
     }
 
@@ -43,26 +65,6 @@ public class GameWorldManager : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloatArray("Location", OurLPC.GetLocation());
-            ObjectIn.PutBool("IsMoving", true);
-            SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
-        }
-        if(Input.GetKeyUp(KeyCode.W))
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloatArray("Location", OurLPC.GetLocation());
-            ObjectIn.PutBool("IsMoving", false);
-            SFServer.Send(new ExtensionRequest("PositionUpdate", ObjectIn));
-        }
-        if(Input.GetMouseButton(1) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            ISFSObject ObjectIn = new SFSObject();
-            ObjectIn.PutFloat("Rotation", OurLPC.GetRotation());
-            SFServer.Send(new ExtensionRequest("RotationUpdate", ObjectIn));
-        }
     }
     void FixedUpdate()
     {
@@ -77,81 +79,10 @@ public class GameWorldManager : MonoBehaviour
         try
         {
             String ResponseType = (string)evt.Params["cmd"];
-            Debug.Log("Received Response: " + ResponseType);
-            ISFSObject ObjectIn = (SFSObject)evt.Params["params"];
-            if(ResponseType == "SpawnPlayer")
-            {
-                Debug.Log(ObjectIn.GetBool("IsLocal"));
-                if(ObjectIn.GetBool("IsLocal")) 
-                {
-                    SpawnLocalPlayer(ObjectIn.GetUtfString("CharacterName"), ObjectIn.GetFloatArray("Location"));
-                }
-                else if(!ObjectIn.GetBool("IsLocal"))
-                {
-                    float[] LocationArray = ObjectIn.GetFloatArray("Location");
-                    float Rotation = ObjectIn.GetFloat("Rotation");
-                    string aCharacterName = ObjectIn.GetUtfString("CharacterName");
-                    SpawnRemotePlayer(aCharacterName, LocationArray, Rotation);
-                }
-            }
-            if(ResponseType == "DespawnPlayer")
-            {
-                string aCharacterName = ObjectIn.GetUtfString("CharacterName");
-                if(aCharacterName == this.OurLPC.GetName())
-                {
-                    return;
-                }
-                else if(PlayerDictionary.ContainsKey(aCharacterName))
-                {
-                    Destroy(GameObject.Find("GameCharacter_" + aCharacterName));
-                    PlayerDictionary.Remove(aCharacterName);
-                }
-            }
-            if(ResponseType == "PositionUpdate")
-            {
-                string aCharacterName = ObjectIn.GetUtfString("CharacterName");
-                if(aCharacterName == this.OurLPC.GetName())
-                {
-                    return;
-                }
-                else if(PlayerDictionary.ContainsKey(aCharacterName))
-                {
-                    float[] LocationArray = ObjectIn.GetFloatArray("Location");
-                    bool IsMoving = ObjectIn.GetBool("IsMoving");
-                    Debug.Log("X: " + LocationArray[0] + "      Y: " + LocationArray[1] + "      Z: " + LocationArray[2]);
-                    PlayerDictionary[aCharacterName].GetComponent<RemotePlayerController>().SetPlayerMoving(IsMoving);
-                    PlayerDictionary[aCharacterName].transform.position = new Vector3(LocationArray[0], LocationArray[1], LocationArray[2]);
-                }
-            }
-            if(ResponseType == "RotationUpdate")
-            {
-                string aCharacterName = ObjectIn.GetUtfString("CharacterName");
-                if(aCharacterName == this.OurLPC.GetName())
-                {
-                    return;
-                }
-                else if(PlayerDictionary.ContainsKey(aCharacterName))
-                {
-                    float Rotation = ObjectIn.GetFloat("Rotation");
-                    Debug.Log(Rotation);
-                    PlayerDictionary[aCharacterName].GetComponent<RemotePlayerController>().SetRotation(Rotation);
-                }
-            }
-            /*if(ResponseType == "MovementUpdate")
-            {
-                string aCharacterName = ObjectIn.GetUtfString("CharacterName");
-                if(aCharacterName == this.OurLPC.GetName())
-                {
-                    Debug.Log("Moving...");
-                    float[] LocationArray = ObjectIn.GetFloatArray("Location");
-                    Debug.Log("X: " + LocationArray[0] + "      Y: " + LocationArray[1] + "      Z: " + LocationArray[2]);
-                    this.OurLPC.MoveToDestination();
-                }
-                else if(PlayerDictionary.ContainsKey(aCharacterName))
-                {
-                    //
-                }
-            }*/
+            //Debug.Log("Received Response: " + ResponseType);
+            ISFSObject anObjectIn = (SFSObject)evt.Params["params"];
+
+            ourSRHDictionary[ResponseType].HandleResponse(anObjectIn, this);
         }
         catch(Exception e)
         {
@@ -164,35 +95,44 @@ public class GameWorldManager : MonoBehaviour
         SFServer.RemoveAllEventListeners();
         SceneManager.LoadScene("Login");
     }
-    private void SpawnRemotePlayer(String aCharacterName, float[] LocationArray, float Rotation)
+    public GameObject createObject(string objectName)
     {
-        //Instantiate RemotePlayerObject
-        GameObject aRemotePlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerBasic", typeof(GameObject)));
-        aRemotePlayer.name = "GameCharacter_" + aCharacterName;
-        aRemotePlayer.AddComponent<RemotePlayerController>();
-        aRemotePlayer.transform.position = new Vector3(LocationArray[0], LocationArray[1], LocationArray[2]);
-        aRemotePlayer.GetComponent<RemotePlayerController>().SetRotation(Rotation);
-        aRemotePlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
-
-        //Add Newly spawned player to Dictionary
-        PlayerDictionary.Add(aCharacterName, aRemotePlayer);
+        return (GameObject)Instantiate(Resources.Load(objectName, typeof(GameObject)));
     }
-    private void SpawnLocalPlayer(String aCharacterName, float[] Loc)
+    public void destroyObject(string objectName)
     {
-        Debug.Log(Loc[0] + "      " + Loc[1] + "      " + Loc[2]);
-        // Lets spawn our local player model
-        LocalPlayer = (GameObject)Instantiate(Resources.Load("Prefabs/PlayerBasic", typeof(GameObject)));
-        LocalPlayer.transform.position = new Vector3(Loc[0], Loc[1], Loc[2]);
-        LocalPlayer.transform.rotation = Quaternion.identity;
-
-        // Since this is the local player, lets add a controller and fix the camera
-        LocalPlayer.AddComponent<LocalPlayerController>();
-        OurLPC = LocalPlayer.GetComponent<LocalPlayerController>();
-        OurLPC.SetName(aCharacterName);
-        LocalPlayer.GetComponentInChildren<TextMesh>().text = aCharacterName;
-        Camera.main.transform.parent = LocalPlayer.transform;
-        Camera.main.GetComponent<CameraController>().target = LocalPlayer;
-        Camera.main.transform.localPosition = new Vector3(0, 6, -12);
+        Destroy(GameObject.Find(objectName));
     }
-
+    public void destroyObject(GameObject o)
+    {
+        Destroy(o);
+    }
+    public LocalPlayerController getLPC()
+    {
+        return this.ourLPC;
+    }
+    public void setLPC(LocalPlayerController aLPC)
+    {
+        this.ourLPC = aLPC;
+    }
+    public Dictionary<string, GameObject> getPlayerDictionary()
+    {
+        return this.ourPlayerDictionary;
+    }
+    public Dictionary<int, GameObject> getNPCDictionary()
+    {
+        return this.ourNPCDictionary;
+    }
+    public Dictionary<int, GameObject> getResourceDictionary()
+    {
+        return this.ourResourceDictionary;
+    }
+    public Dictionary<int, String> getItemNameDictionary()
+    {
+        return this.itemNameDictionary;
+    }
+    public Dictionary<int, String> getItemDescriptionDictionary()
+    {
+        return this.itemDescriptionDictionary;
+    }
 }

@@ -70,6 +70,15 @@
     <Reference Include="SmartFox2X">
       <HintPath>Assets\Plugins\SmartFox2X.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets\AssetStoreTools\UMA\Example\DLL\LitJson.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Project-Circleage.CSharp.Plugins.csproj">
+      <Project>{028865FE-5C8B-BB29-0DFE-2AFB4FCC8C68}</Project>
+      <Name>Project-Circleage.CSharp.Plugins</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\HairRenderer.cs" />
@@ -95,6 +104,15 @@
     <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\Displace.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\MeshContainer.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\PlanarReflection.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\SpecularLighting.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
+    <Compile Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\ActivateTrigger.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\AutoMoveAndRotate.cs" />
@@ -118,21 +136,89 @@
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\AssetStoreTools\Standard Assets\Utility\WaypointProgressTracker.cs" />
+    <Compile Include="Assets\AssetStoreTools\TerrainComposer\Runtime\TerrainHeight.cs" />
+    <Compile Include="Assets\AssetStoreTools\TerrainComposer\Scripts\MultiTerrainBoost.cs" />
+    <Compile Include="Assets\AssetStoreTools\TerrainComposer\Scripts\Utility Scripts\CombineChildren.cs" />
+    <Compile Include="Assets\AssetStoreTools\TerrainComposer\Scripts\Utility Scripts\MeshCombineUtility.cs" />
+    <Compile Include="Assets\AssetStoreTools\TerrainComposer\Scripts\rtp_functions.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\HumanFemaleDNAConverterBehaviour.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\HumanMaleDNAConverterBehaviour.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\HumanoidDNAConverterBehaviour.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\TutorialDNAConverterBehaviour.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\UMADna.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\UMADnaHumanoid.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\UMADnaHumanoid_Generated.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\UMADnaTutorial.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\UMADnaTutorial_Generated.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\DNA\UMADna_Generated.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\Slots\AdditionalSlots\CapsuleCollider\CapsuleColliderSlotScript.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\Slots\AdditionalSlots\Expressions\ExpressionSlotScript.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\Slots\AdditionalSlots\ForearmTwist\ForearmTwistSlotScript.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\Slots\AdditionalSlots\Locomotion\LocomotionSlotScript.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Content\UMA\Legacy\Slots\Female\FemaleEyelash\FemaleEyelash_EventScript.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Expressions\Scenes\Scripts\ActiveObjectSwitcher.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Expressions\Scenes\Scripts\EditModeExpressionPreview.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Expressions\Scenes\Scripts\SliderExpressionTest.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\CameraTrack.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\HUDFPS.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\Locomotion.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\OverlayLibrary.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\RaceLibrary.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\SharedColorTable.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\SkeletonTools.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\SlotLibrary.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMACharacterCustomization.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMACrowd.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMACrowdRandomSet.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMACustomization.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMAGenericCrowd.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMAGenericCustomization.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMAPackedRecipeBase.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMARecipeCrowd.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMARecipeMixer.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMARemoveComponents.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMASlotVerifyWizard.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMATestEventsScript.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\UMATextRecipe.cs" />
+    <Compile Include="Assets\AssetStoreTools\UMA\Example\Shaders\BRDFLookupTexture.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\CameraController.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\Controllers\InputController.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\Controllers\ItemImageHandler.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\LocalPlayerController.cs" />
     <Compile Include="Assets\Scripts\GameWorld\Controllers\RemotePlayerController.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\Data\Item.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameUI.cs" />
     <Compile Include="Assets\Scripts\GameWorld\GameWorldManager.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\PlayerActions\CenterNodeAction.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\PlayerActions\ContributeCenterNodeAction.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\PlayerActions\GatherResourceAction.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\PlayerActions\PlayerAction.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\PlayerActions\UseItemAction.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\RayCastManager.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\CenterNodeInformationHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\DespawnPlayerHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\GatherResourceHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\InventoryUpdateHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\PositionUpdateHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ProcessChatHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\RotationUpdateHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\ServerResponseHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnNPCHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnNodeHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnPlayerHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnResourceHandler.cs" />
+    <Compile Include="Assets\Scripts\GameWorld\ServerResponseHandlers\SpawnSettlementHandler.cs" />
     <Compile Include="Assets\Scripts\Startup\CharacterCreation.cs" />
     <Compile Include="Assets\Scripts\Startup\CharacterSelection.cs" />
     <Compile Include="Assets\Scripts\Startup\LoginConnector.cs" />
     <Compile Include="Assets\Scripts\Util\SmartFoxConnection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
-    <None Include="Assets\AssetStoreTools\MORPH3D\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard&apos;s\Wizard_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\AdventureForge\Read me.txt" />
+    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\2Weapons\2W_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Halberd\Halberd_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Horseman\Horseman_motiondata.xml" />
+    <None Include="Assets\AssetStoreTools\MEDIEVAL_ANIMATIONS_MEGA_PACK_new\Wisard&apos;s\Wizard_motiondata.xml" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Readme.txt" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_Standard.shader" />
     <None Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Hair_UnityStandardCore.cginc" />
@@ -150,6 +236,53 @@
     <None Include="Assets\AssetStoreTools\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\AssetStoreTools\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\AssetStoreTools\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+    <None Include="Assets\AssetStoreTools\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Assets\Shaders\BillboardTree.shader" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Assets\Shaders\FastTreeCreatorLeaves.shader" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Assets\Shaders\FastTreeCreatorLeavesOptimized.shader" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Assets\Shaders\Tree.cginc" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Assets\Shaders\TreeVertexLit.cginc" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Assets\Shaders\Vegetation-TwoPassUnlit.shader" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer Examples\Projects\version1.2.txt" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer\Runtime\ReadMe.txt" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer\Templates\Drawing_tc.shader" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer\TerrainComposer Release Notes.txt" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer\Update\check.txt" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer\Update\last_checked.txt" />
+    <None Include="Assets\AssetStoreTools\TerrainComposer\Update\version.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Content\UMA\Humanoid\FBX\Expressions\Blender_Pose_Frames.xml" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDnaChild_Byte_Fields_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDnaChild_Byte_FromDna_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDnaChild_Byte_ToDna_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDnaChild_GetIndex_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDnaChild_GetNames_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDnaChild_GetValue_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDnaChild_SetIndex_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDnaChild_SetValue_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDnaChild_Template.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDna_GetNames_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDna_GetType_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDna_GetTypes_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDna_Load_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDna_Save_Fragment.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Editor\Templates\UmaDna_Template.cs.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\DLL\DLL Source Code.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\Expressions\Scenes\Editing Expression Clips.txt" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\Shaders\Normal-BumpSpec.shader" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\Shaders\Normal-BumpSpec_Rim.shader" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\Shaders\Rim.shader" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\Shaders\TransparentTwoSided.shader" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\Shaders\UnLogickShaders\Debug_Normals.shader" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\Shaders\UnLogickShaders\Debug_Tangents.shader" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\Shaders\UnLogickShaders\Human-Normal-Diffuse-Metallic.shader" />
+    <None Include="Assets\AssetStoreTools\UMA\Example\Shaders\UnLogickShaders\Human-Normal-Diffuse.shader" />
+    <None Include="Assets\AssetStoreTools\UMA\_ReleaseNotes.txt" />
+    <None Include="Assets\Standard Assets\UMA\Core\Atlas\AtlasNormalShader.shader" />
+    <None Include="Assets\Standard Assets\UMA\Core\Atlas\AtlasShader.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

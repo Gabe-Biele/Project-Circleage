@@ -84,8 +84,6 @@ public class LoginConnector : MonoBehaviour
     {
         if(buttonName == "LoginButton")
         {
-            Debug.Log("Username: " + UsernameTB.text);
-            Debug.Log("Password: " + PasswordTB.text);
             String EncryptedPW = PasswordUtil.MD5Password(PasswordTB.text);
             SFServer.Send(new LoginRequest(UsernameTB.text, EncryptedPW, GAME_ZONE));
             SFServer.Send(new JoinRoomRequest("Game"));
@@ -167,7 +165,7 @@ public class LoginConnector : MonoBehaviour
             {
                 Debug.Log("Success, thanks for registering");
                 MessageText.GetComponent<Text>().text = "Success, thanks for registering";
-                SceneManager.LoadScene("CharacterSelection");
+                SceneManager.LoadScene("Login");
                 SFServer.RemoveAllEventListeners();
             }
             else
