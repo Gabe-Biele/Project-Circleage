@@ -5,16 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6B3D5AFC-1E7F-0458-86B2-2FE04D5FEB0F}</ProjectGuid>
+    <ProjectGuid>{634CC820-48B7-1324-8BA6-720C5083442A}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
-    <UnityProjectType>Editor:5</UnityProjectType>
+    <UnityProjectType>EditorPlugins:7</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
     <RootNamespace></RootNamespace>
@@ -113,23 +113,34 @@
       <Project>{3E05ADE8-F2BC-3234-6D74-335DB8668FC7}</Project>
       <Name>Project-Circleage.CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="Project-Circleage.CSharp.Editor.Plugins.csproj">
-      <Project>{634CC820-48B7-1324-8BA6-720C5083442A}</Project>
-      <Name>Project-Circleage.CSharp.Editor.Plugins</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Hair\Editor\HairShaderGUI.cs" />
-    <Compile Include="Assets\AssetStoreTools\MORPH3D\Vendor\Unity\Shaders\Skin\Editor\VolundMultiStandardShaderGUI.cs" />
-    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\Editor\M3DBlendshapeNamesEditor.cs" />
-    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\Editor\M3DCharacterManagerEditor.cs" />
-    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\Editor\MaterialImporter.cs" />
-    <Compile Include="Assets\AssetStoreTools\MORPH3D\scripts\Editor\SearchableWindow.cs" />
-    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\Editor\BRDFLookupTextureInspector.cs" />
-    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\Editor\OverlayLibraryEditor.cs" />
-    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\Editor\SharedColorTableEditor.cs" />
-    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\Editor\SlotLibraryEditor.cs" />
-    <Compile Include="Assets\AssetStoreTools\UMA\Example\Scripts\Editor\UMAAvatarLoadSaveMenuItems.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\CharacterBaseEditor.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\CodeGenTemplate.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\CreateCleanAnimationMenu.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\DNARangeInspector.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\DictionaryCustomFormatter.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\ExpressionPlayerInspector.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\GUIHelper.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\OverlayColorDataPropertyDrawer.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\OverlayInspector.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\RaceInspector.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\RecipeEditor.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\SlotDataAssetInspector.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\SlotInspector.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\TPoseExtracter.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMAAssetCollectionEditor.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMABonePoseBuildWindow.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMABonePoseMixerWindow.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMADNAHelperTools.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMADataEditor.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMAExpressionSetInspector.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMAFindMissingReferences.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMAObjExporter.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMASlotProcessingUtil.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UMATextureImporterUtil.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UmaLegacyMaterialBuilderWindow.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\UMA\Core\UmaSlotBuilderWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AssetStoreTools\AdventureForge\Read me.txt" />

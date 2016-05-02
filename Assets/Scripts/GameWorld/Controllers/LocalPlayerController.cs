@@ -74,30 +74,4 @@ public class LocalPlayerController : MonoBehaviour
     {
         return playerInventory;
     }
-    /*public void addItem(int itemID, string subLocation, int baglocation, int quantity)
-    {
-        if(ourGWM == null)
-        {
-            ourGWM = GameObject.Find("SceneScriptsObject").GetComponent<GameWorldManager>();
-        }
-        if (itemList == null)
-        {
-            itemList = new List<Item>();
-        }
-        Debug.Log("Adding item.");
-        Item itemAdded = new Item(itemID, subLocation, baglocation, quantity);
-        string itemName;
-        if (ourGWM.getItemNameDictionary().TryGetValue(itemID, out itemName))
-        {
-            Debug.Log(itemName);
-            itemAdded.setName(itemName);
-        }
-        string itemDesc;
-        if (ourGWM.getItemDescriptionDictionary().TryGetValue(itemID, out itemDesc))
-        {
-            Debug.Log(itemDesc);
-            itemAdded.setDescription(itemDesc);
-        }
-        itemList.Add(itemAdded);
-    }*/
 }

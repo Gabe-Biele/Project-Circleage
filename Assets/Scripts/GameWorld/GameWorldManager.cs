@@ -51,17 +51,9 @@ public class GameWorldManager : MonoBehaviour
         ourSRHDictionary.Add("ProcessChat", new ProcessChatHandler());
         ourSRHDictionary.Add("GatherResource", new GatherResourceHandler());
         ourSRHDictionary.Add("SpawnSettlement", new SpawnSettlementHandler());
+        ourSRHDictionary.Add("SpawnNode", new SpawnNodeHandler());
         ourSRHDictionary.Add("CenterNodeInformation", new CenterNodeInformationHandler());
         ourSRHDictionary.Add("InventoryUpdate", new InventoryUpdateHandler());
-
-        //Load Items
-        string[] items = File.ReadAllLines("Assets\\Resources\\items.txt");
-        foreach (string itemInfo in items)
-        {
-            string[] splitItemInfo = itemInfo.Split('_');
-            itemNameDictionary.Add(Int32.Parse(splitItemInfo[0]), splitItemInfo[1]);
-            itemDescriptionDictionary.Add(Int32.Parse(splitItemInfo[0]), splitItemInfo[2]);
-        }
 
         ISFSObject ObjectIn = new SFSObject();
         ObjectIn.PutUtfString("AccountName", SFServer.MySelf.Name.ToLower());

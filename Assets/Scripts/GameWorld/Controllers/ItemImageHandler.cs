@@ -19,11 +19,13 @@ public class ItemImageHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovered = true;
+        ourUI.setCurrentInventoryItem(thisItem);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovered = false;
+        ourUI.setCurrentInventoryItem(null);
     }
 
     void IDropHandler.OnDrop(PointerEventData eventData)
@@ -49,7 +51,7 @@ public class ItemImageHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
         }
         else if(isHovered&&hoverboxExists)
         {
-            hoverbox.transform.position = Input.mousePosition + new Vector3(-95, 47);
+            hoverbox.transform.position = Input.mousePosition + new Vector3(-95, 51);
         }
         if(!isHovered)
         {
